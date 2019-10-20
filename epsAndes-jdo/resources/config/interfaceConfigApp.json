@@ -1,0 +1,83 @@
+{
+	"title": "Aplicación transaccional de Parranderos Uniandes",
+	"frameH": 600,
+	"frameW": 800,
+	"bannerPath": "./src/main/resources/config/logo.png",
+	"menuBar":
+	[
+		{ "menuTitle": "Eps",
+		  "options":
+			[
+				{
+					"label": "Adicionar",
+					"event": "adicionarEps"
+				}
+			]
+		},
+		{ "menuTitle": "Usuario",
+		  "options":
+			[
+				{
+					"label": "Mostrar log Parranderos",
+					"event": "mostrarLogParranderos"
+				},
+				{
+					"label": "Listar",
+					"event": "listarUsuarios"
+				},
+				{
+					"label": "Limpiar log de parranderos",
+					"event": "limpiarLogParranderos"
+				},
+				{
+					"label": "Limpiar log de datanucleus",
+					"event": "limpiarLogDatanucleus"
+				},
+				{
+					"label": "Limpiar Base de Datos",
+					"event": "limpiarBD"
+				}
+			]
+		},		
+		{ "menuTitle": "Afiliado",
+		  "options":
+			[
+				{
+					"label": "Presentación general",
+					"event": "mostrarPresentacionGeneral"
+				},
+				{
+					"label": "Modelo conceptual",
+					"event": "mostrarModeloConceptual"
+				},
+				{
+					"label": "Esquema de la BD",
+					"event": "mostrarEsquemaBD"
+				},
+				{
+					"label": "Script creación de la BD",
+					"event": "mostrarScriptBD"
+				},
+				{
+					"label": "Arquitectura de referencia",
+					"event": "mostrarArqRef"
+				},
+				{
+					"label": "Javadoc Parranderos",
+					"event": "mostrarJavadoc"
+				}
+			]
+		},		
+		{ "menuTitle": "Medico",
+		  "options":
+			[
+				{
+					"label": "Acerca de ...",
+					"event": "acercaDe"
+				}
+			]
+		}		
+		
+	]
+}
+	
