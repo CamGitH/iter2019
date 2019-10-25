@@ -5,16 +5,36 @@
 	"bannerPath": "./resources/config/logo.jpg",
 	"menuBar":
 	[
-		{ "menuTitle": "Eps",
+		{ "menuTitle": "Registrar",
 		  "options":
 			[
 				{
-					"label": "Adicionar",
-					"event": "adicionarEps"
+					"label": "RegistrarEps",
+					"event": "registrarEps"
+				},
+				{
+					"label": "RegistrarUsuario",
+					"event": "registrarUsuario"
+				},
+				{
+					"label":"RegistrarAfiliado",
+					"event":"registrarAfiliado"
+				},
+				{
+					"label":"RegistrarMedico",
+					"event":"registrarMedico"
+				},
+				{
+					"label": "RegistrarServicio",
+					"event": "registrarServicio"
+				},
+				{
+					"label": "RegistrarOrdenDeServicio",
+					"event": "registrarOrdenDeServicio"
 				}
 			]
 		},
-		{ "menuTitle": "Usuarios",
+		{ "menuTitle": "Consultas",
 		  "options":
 			[
 				{

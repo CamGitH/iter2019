@@ -5,7 +5,7 @@
 	"bannerPath": "./resources/config/logo.jpg",
 	"menuBar":
 	[
-		{ "menuTitle": "Afiliado",
+		{ "menuTitle": "Usuario",
 		  "options":
 			[
 				{
@@ -14,28 +14,24 @@
 				}
 			]
 		},
-		{ "menuTitle": "Eps",
+		{ "menuTitle": "Registrar Servicios",
 		  "options":
 			[
 				{
-					"label": "Mostrar log Parranderos",
-					"event": "mostrarLogParranderos"
+					"label": "Registrar consulta",
+					"event": "registrar_consulta"
 				},
 				{
-					"label": "Listar",
-					"event": "listarUsuarios"
+					"label": "Registrar Examen Diagnostico",
+					"event": "registrar_examen_diagnostico"
 				},
 				{
-					"label": "Limpiar log de parranderos",
-					"event": "limpiarLogParranderos"
+					"label": "Registrar Terapias",
+					"event": "tegistrar_terapias"
 				},
 				{
-					"label": "Limpiar log de datanucleus",
-					"event": "limpiarLogDatanucleus"
-				},
-				{
-					"label": "Limpiar Base de Datos",
-					"event": "limpiarBD"
+					"label": "Registrar Hospitalizacion",
+					"event": "registrar_hospitalizacion"
 				}
 			]
 		},		

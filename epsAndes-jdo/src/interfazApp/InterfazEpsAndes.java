@@ -54,6 +54,13 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 	
 	public InterfazEpsAndes()
 	{
+		
+		String [] usuarios= {"Afiliado", "Medico", "Recepcionista", "Administrador", "Gerente"};
+		
+		ImageIcon icono= new ImageIcon("./resources/config/icono.jpg");
+		
+		String resp = (String) JOptionPane.showInputDialog(this, "Seleccione una carrera a cursar", "Carrera", JOptionPane.DEFAULT_OPTION,icono, usuarios, usuarios[0]);
+		
 		guiConfig = openConfig ("Interfaz", CONFIG_INTERFAZ);
         
         // Configura la apariencia del frame que contiene la interfaz gráfica
