@@ -25,7 +25,7 @@ public class SQLMedicoGeneral {
 	
 	public long registrarMedicoGeneral (PersistenceManager pm, long id, String nombre, String apellido, String pReg, String pIps) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pe.darTablaMedicoGeneral () + "(nombre, apellido,  identificacion) values (?, ?, ?)");
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pe.darTablaMedicoGeneral () + "(nombre, apellido,  identificacion, pReg, pIps) values (?, ?, ?, ?, ?)");
         q.setParameters(nombre, apellido, id, pReg, pIps );
         return (long) q.executeUnique();
 	}

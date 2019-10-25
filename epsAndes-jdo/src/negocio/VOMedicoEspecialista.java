@@ -9,15 +9,7 @@ public interface VOMedicoEspecialista{
 	 */
 	public long getId();
 	
-	/**
-	 * @return Nombre
-	 */
-	public String getNombre();
-
-	/**
-	 * @return Apellido
-	 */
-	public String getApellido();
+	
 
 	/**
 	 * @return Especialidad

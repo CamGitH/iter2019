@@ -23,10 +23,10 @@ public class SQLMedicoEspecialista {
 		this.pe=pe;
 	}
 	
-	public long registrarMedicoEspecialista (PersistenceManager pm, long id, String nombre, String apellido, String especialidad) 
+	public long registrarMedicoEspecialista (PersistenceManager pm, long id, String especialidad) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pe.darTablaMedicoEspecialista() + "(nombre, apellido, ESPECIALIDAD, identificacion) values (?, ?, ?, ?)");
-        q.setParameters(nombre, apellido, especialidad, id);
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pe.darTablaMedicoEspecialista() + "( ESPECIALIDAD, identificacion) values ( ?, ?)");
+        q.setParameters( especialidad, id);
         return (long) q.executeUnique();
 	}
 	

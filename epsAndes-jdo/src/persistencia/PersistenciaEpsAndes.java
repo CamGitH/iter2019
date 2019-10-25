@@ -479,7 +479,7 @@ public class PersistenciaEpsAndes {
 	}
 	
 	
-	public MedicoEspecialista adicionarMedicoEspecialista(String pnombre, String pApellido , String pEspeci)
+	public MedicoEspecialista adicionarMedicoEspecialista( String pEspeci)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -487,12 +487,12 @@ public class PersistenciaEpsAndes {
         {
             tx.begin();
             long idMedico = nextval ();
-            long tuplasInsertadas = sqlMedicoEspecialista.registrarMedicoEspecialista(pm, idMedico, pnombre, pApellido, pEspeci);
+            long tuplasInsertadas = sqlMedicoEspecialista.registrarMedicoEspecialista(pm, idMedico, pEspeci);
             tx.commit();
             
             log.trace ("Inserción del medico especialista: " + idMedico + ": " + tuplasInsertadas + " tuplas insertadas");
             
-            return new MedicoEspecialista(idMedico, pnombre, pApellido, pEspeci);
+            return new MedicoEspecialista(idMedico, pEspeci);
         }
         catch (Exception e)
         {

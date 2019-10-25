@@ -126,7 +126,7 @@ public class EpsAndes {
 	public MedicoEspecialista agregarMedicoEspecialista(String pNombre, String pApellido, String pEspeci)
 	{
 		log.info ("Adicionando MedicoEspecialista " + pNombre);
-		MedicoEspecialista MedicoEspecialista = pe.adicionarMedicoEspecialista(pNombre, pApellido, pEspeci);
+		MedicoEspecialista MedicoEspecialista = pe.adicionarMedicoEspecialista( pEspeci);
         log.info ("Adicionando MedicoEspecialista: " + MedicoEspecialista);
         return MedicoEspecialista;
 	}
