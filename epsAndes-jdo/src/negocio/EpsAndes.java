@@ -94,34 +94,13 @@ public class EpsAndes {
         return afiliados;
 	}
 	
-	public Medico agregarMedico(String pRegistro, String pIps)
-	{
-		log.info ("Adicionando Medico " + pRegistro);
-		Medico medico = pe.adicionarMedico(pRegistro, pIps);
-        log.info ("Adicionando Medico: " + medico);
-        return medico;
-	}
 	
-	public long eliminarMedico(long idMedico)
-	{
-		log.info ("eliminando Medico por id: " + idMedico);
-		long resp = pe.eliminarMedicoPorId(idMedico);
-        log.info ("eliminando Medico: " + resp + "tuplas eliminadas");
-        return resp;
-	}
 	
-	public List<Medico> darMedicos ()
-	{
-        log.info ("Consultando Medicos");
-        List<Medico> medicos = pe.darMedicos ();	
-        log.info ("Consultando Medicos: " + medicos.size() + " Medicos existentes");
-        return medicos;
-	}
 	
-	public MedicoGeneral agregarMedicoGeneral(String pNombre, String pApellido)
+	public MedicoGeneral agregarMedicoGeneral(String pNombre, String pApellido, String pReg, String pIps)
 	{
 		log.info ("Adicionando MedicoGeneral " + pNombre);
-		MedicoGeneral medicoGeneral = pe.adicionarMedicoGeneral(pNombre, pApellido);
+		MedicoGeneral medicoGeneral = pe.adicionarMedicoGeneral(pNombre, pApellido, pReg, pIps);
         log.info ("Adicionando MedicoGeneral: " + medicoGeneral);
         return medicoGeneral;
 	}

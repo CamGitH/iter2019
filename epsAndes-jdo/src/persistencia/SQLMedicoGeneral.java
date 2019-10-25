@@ -2,10 +2,10 @@ package persistencia;
 
 import java.util.List;
 
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import negocio.Medico;
 import negocio.MedicoGeneral;
 import negocio.OrdenDeServicio;
 
@@ -23,10 +23,10 @@ public class SQLMedicoGeneral {
 		this.pe=pe;
 	}
 	
-	public long registrarMedicoGeneral (PersistenceManager pm, long id, String nombre, String apellido) 
+	public long registrarMedicoGeneral (PersistenceManager pm, long id, String nombre, String apellido, String pReg, String pIps) 
 	{
         Query q = pm.newQuery(SQL, "INSERT INTO " + pe.darTablaMedicoGeneral () + "(nombre, apellido,  identificacion) values (?, ?, ?)");
-        q.setParameters(nombre, apellido, id);
+        q.setParameters(nombre, apellido, id, pReg, pIps );
         return (long) q.executeUnique();
 	}
 	

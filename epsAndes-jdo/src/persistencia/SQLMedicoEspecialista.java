@@ -2,10 +2,10 @@ package persistencia;
 
 import java.util.List;
 
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
-import negocio.Medico;
 import negocio.MedicoEspecialista;
 
 public class SQLMedicoEspecialista {

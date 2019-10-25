@@ -5,7 +5,7 @@
 	"bannerPath": "./resources/config/logo.jpg",
 	"menuBar":
 	[
-		{ "menuTitle": "Afiliado",
+		{ "menuTitle": "Eps",
 		  "options":
 			[
 				{
@@ -14,7 +14,7 @@
 				}
 			]
 		},
-		{ "menuTitle": "Eps",
+		{ "menuTitle": "Usuarios",
 		  "options":
 			[
 				{
@@ -39,7 +39,7 @@
 				}
 			]
 		},		
-		{ "menuTitle": "Servicio",
+		{ "menuTitle": "Afiliados",
 		  "options":
 			[
 				{
@@ -68,7 +68,7 @@
 				}
 			]
 		},		
-		{ "menuTitle": "Medico",
+		{ "menuTitle": "Medicos",
 		  "options":
 			[
 				{

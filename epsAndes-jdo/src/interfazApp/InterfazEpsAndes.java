@@ -2,6 +2,7 @@ package interfazApp;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileReader;
@@ -35,6 +36,8 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 	
 	private static final String CONFIG_INTERFAZ = "./resources/config/interfaceConfigApp.json";
 	
+	private static final String CONFIG_INTERFAZ_Admin = "./resources/config/interfaceConfiAdminjson";
+	
 	
 	private static final String CONFIG_TABLAS = "./resources/config/TablasBD_A.json"; 
 	
@@ -65,9 +68,13 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
         
     	String path = guiConfig.get("bannerPath").getAsString();
         panelDatos = new PanelDatos ( );
+        ImageIcon imagen=new ImageIcon (path);
+        JLabel img=new JLabel(imagen);
+        img.setPreferredSize(new Dimension(200,200));
+        
 
         setLayout (new BorderLayout());
-        add (new JLabel (new ImageIcon (path)), BorderLayout.NORTH );          
+        add (img, BorderLayout.NORTH );          
         add( panelDatos, BorderLayout.CENTER ); 
 	}
 	

@@ -4,6 +4,17 @@ public interface VOMedico{
 	/* **********************
 	 * 			Métodos 
 	 ***********************/
+	
+	/**
+	 * @return nombre
+	 */
+	public String getNombre();
+	
+	/**
+	 * @return Apellido
+	 */
+	public String getApellido();
+	
      /**
 	 * @return  Id
 	 */

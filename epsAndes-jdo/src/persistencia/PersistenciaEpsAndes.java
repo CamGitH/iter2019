@@ -1,6 +1,7 @@
 package persistencia;
 
 import java.sql.Date;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,7 +19,6 @@ import com.google.gson.JsonObject;
 
 import negocio.Afiliado;
 import negocio.Eps;
-import negocio.Medico;
 import negocio.MedicoEspecialista;
 import negocio.MedicoGeneral;
 import negocio.Usuario;
@@ -59,7 +59,6 @@ public class PersistenciaEpsAndes {
 	
 	private SQLMedicamento sqlMedicamento;
 	
-	private SQLMedico sqlMedico;
 	
 	private SQLMedicoEspecialista sqlMedicoEspecialista;
 	
@@ -143,7 +142,6 @@ public class PersistenciaEpsAndes {
 		sqlConsulta= new SQLConsulta(this);
 		sqlIps= new SQLIps(this);
 		sqlMedicamento= new SQLMedicamento(this);
-		sqlMedico=new SQLMedico(this);
 		sqlMedicoEspecialista= new SQLMedicoEspecialista(this);
 		sqlMedicoGeneral = new SQLMedicoGeneral(this);
 		sqlOrdenDeServicio= new SQLOrdenDeServicio(this);
@@ -416,7 +414,7 @@ public class PersistenciaEpsAndes {
 	}
 	
 	
-	public Medico adicionarMedico(String pRegistro, String pIps)
+	public MedicoGeneral adicionarMedicoGeneral(String pnombre, String pApellido , String pRegistro, String pIps)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();
         Transaction tx=pm.currentTransaction();
@@ -424,75 +422,12 @@ public class PersistenciaEpsAndes {
         {
             tx.begin();
             long idMedico = nextval ();
-            long tuplasInsertadas = sqlMedico.registrarMedico(pm, idMedico, pRegistro, pIps);
-            tx.commit();
-            
-            log.trace ("Inserción de medico: " + idMedico + ": " + tuplasInsertadas + " tuplas insertadas");
-            
-            return new Medico(idMedico, pRegistro, pIps);
-        }
-        catch (Exception e)
-        {
-
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-        	return null;
-        }
-        finally
-        {
-            if (tx.isActive())
-            {
-                tx.rollback();
-            }
-            pm.close();
-        }
-	}
-	
-	public long eliminarMedicoPorId (long idMedico) 
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
-        try
-        {
-            tx.begin();
-            long resp = sqlMedico.eliminarMedicoPorId(pm, idMedico);
-            tx.commit();
-            return resp;
-        }
-        catch (Exception e)
-        {
-//        	e.printStackTrace();
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
-            return -1;
-        }
-        finally
-        {
-            if (tx.isActive())
-            {
-                tx.rollback();
-            }
-            pm.close();
-        }
-	}
-	
-	public List<Medico> darMedicos ()
-	{
-		return sqlMedico.darMedicos (pmf.getPersistenceManager());
-	}
-	
-	public MedicoGeneral adicionarMedicoGeneral(String pnombre, String pApellido )
-	{
-		PersistenceManager pm = pmf.getPersistenceManager();
-        Transaction tx=pm.currentTransaction();
-        try
-        {
-            tx.begin();
-            long idMedico = nextval ();
-            long tuplasInsertadas = sqlMedicoGeneral.registrarMedicoGeneral(pm, idMedico, pnombre, pApellido);
+            long tuplasInsertadas = sqlMedicoGeneral.registrarMedicoGeneral(pm, idMedico, pnombre, pApellido, pRegistro, pIps);
             tx.commit();
             
             log.trace ("Inserción del medico general: " + idMedico + ": " + tuplasInsertadas + " tuplas insertadas");
             
-            return new MedicoGeneral(idMedico, pnombre, pApellido);
+            return new MedicoGeneral( pnombre, pApellido, idMedico,pRegistro, pApellido);
         }
         catch (Exception e)
         {
