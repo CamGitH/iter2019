@@ -36,7 +36,13 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 	
 	private static final String CONFIG_INTERFAZ = "./resources/config/interfaceConfigApp.json";
 	
-	private static final String CONFIG_INTERFAZ_Admin = "./resources/config/interfaceConfiAdminjson";
+	private static final String CONFIG_INTERFAZ_Admin = "./resources/config/interfaceConfigAdmin.json";
+	
+	private static final String CONFIG_INTERFAZ_Medico = "./resources/config/interfaceConfigDemo.json";
+	
+	private static final String CONFIG_INTERFAZ_Recepcionista = "./resources/config/interfaceConfigRecepcionista.json";
+	
+	private static final String CONFIG_INTERFAZ_Gerente = "./resources/config/interfaceConfigGerente.json";
 	
 	
 	private static final String CONFIG_TABLAS = "./resources/config/TablasBD_A.json"; 
@@ -61,7 +67,23 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 		
 		String resp = (String) JOptionPane.showInputDialog(this, "Seleccione una carrera a cursar", "Carrera", JOptionPane.DEFAULT_OPTION,icono, usuarios, usuarios[0]);
 		
-		guiConfig = openConfig ("Interfaz", CONFIG_INTERFAZ);
+		if(resp.equals("Afiliado"))
+		{
+			guiConfig = openConfig ("Interfaz", CONFIG_INTERFAZ);
+		}
+		else if (resp.equals("Administrador")) {
+			guiConfig = openConfig ("Interfaz", CONFIG_INTERFAZ_Admin);
+		}
+		else if (resp.equals("Medico")) {
+			guiConfig = openConfig ("Interfaz", CONFIG_INTERFAZ_Medico);
+		}
+		else if (resp.equals("Recepcionista")) {
+			guiConfig = openConfig ("Interfaz", CONFIG_INTERFAZ_Recepcionista);
+		}
+		else if (resp.equals("Gerente")) {
+			guiConfig = openConfig ("Interfaz", CONFIG_INTERFAZ_Gerente);
+		}
+		
         
         // Configura la apariencia del frame que contiene la interfaz gráfica
         configurarFrame ( );
