@@ -1,6 +1,6 @@
 package negocio;
 
-public class Consulta implements VOConsulta{
+public class Consulta extends Servicio implements VOConsulta{
 	
 	private long codigoServicio;
 	

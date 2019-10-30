@@ -44,6 +44,8 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 	
 	private static final String CONFIG_INTERFAZ_Gerente = "./resources/config/interfaceConfigGerente.json";
 	
+	private static final String CONFIG_INTERFAZ_Admin_Campaña = "./resources/config/interfaceConfigAdminCampña.json";
+	
 	
 	private static final String CONFIG_TABLAS = "./resources/config/TablasBD_A.json"; 
 	
@@ -61,7 +63,7 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 	public InterfazEpsAndes()
 	{
 		
-		String [] usuarios= {"Afiliado", "Medico", "Recepcionista", "Administrador", "Gerente"};
+		String [] usuarios= {"Afiliado", "Medico", "Recepcionista", "Administrador", "Gerente", "Organizador de campaña"};
 		
 		ImageIcon icono= new ImageIcon("./resources/config/icono.jpg");
 		
@@ -82,6 +84,9 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 		}
 		else if (resp.equals("Gerente")) {
 			guiConfig = openConfig ("Interfaz", CONFIG_INTERFAZ_Gerente);
+		}
+		else if (resp.equals("Organizador de campaña")) {
+			guiConfig = openConfig ("Interfaz", CONFIG_INTERFAZ_Admin_Campaña);
 		}
 		
         

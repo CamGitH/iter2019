@@ -1,6 +1,7 @@
 package negocio;
 
-public class MedicoEspecialista implements VOMedicoEspecialista {
+public class MedicoEspecialista extends MedicoGeneral implements VOMedicoEspecialista 
+{
 	
 	
 	private long id;

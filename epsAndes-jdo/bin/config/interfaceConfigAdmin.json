@@ -9,27 +9,31 @@
 		  "options":
 			[
 				{
-					"label": "RegistrarEps",
+					"label": "Registrar Eps",
 					"event": "registrarEps"
 				},
 				{
-					"label": "RegistrarUsuario",
+					"label": "Registrar Usuario",
 					"event": "registrarUsuario"
 				},
 				{
-					"label":"RegistrarAfiliado",
+					"label": "Registrar Organizador de Campaña",
+					"event": "registrarUsuario"
+				},
+				{
+					"label":"Registrar Afiliado",
 					"event":"registrarAfiliado"
 				},
 				{
-					"label":"RegistrarMedico",
+					"label":"Registrar Medico",
 					"event":"registrarMedico"
 				},
 				{
-					"label": "RegistrarServicio",
+					"label": "Registrar Servicio",
 					"event": "registrarServicio"
 				},
 				{
-					"label": "RegistrarOrdenDeServicio",
+					"label": "Registrar Orden De Servicio",
 					"event": "registrarOrdenDeServicio"
 				}
 			]
