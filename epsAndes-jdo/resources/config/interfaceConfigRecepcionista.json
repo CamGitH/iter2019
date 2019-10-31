@@ -1,5 +1,5 @@
 {
-	"title": "Aplicación transaccional de Parranderos Uniandes",
+	"title": "Aplicacion transaccional de EpsAndes",
 	"frameH": 600,
 	"frameW": 800,
 	"bannerPath": "./resources/config/logo.jpg",
@@ -27,7 +27,7 @@
 				},
 				{
 					"label": "Registrar Terapias",
-					"event": "tegistrar_terapias"
+					"event": "registrar_terapias"
 				},
 				{
 					"label": "Registrar Hospitalizacion",

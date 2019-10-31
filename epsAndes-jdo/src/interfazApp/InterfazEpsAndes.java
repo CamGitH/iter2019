@@ -1,6 +1,7 @@
 package interfazApp;
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -29,6 +30,7 @@ import negocio.EpsAndes;
 
 
 
+
 @SuppressWarnings("serial")
 public class InterfazEpsAndes extends JFrame implements ActionListener{
 
@@ -44,7 +46,7 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 	
 	private static final String CONFIG_INTERFAZ_Gerente = "./resources/config/interfaceConfigGerente.json";
 	
-	private static final String CONFIG_INTERFAZ_Admin_Campaña = "./resources/config/interfaceConfigAdminCampña.json";
+	private static final String CONFIG_INTERFAZ_Admin_Campaña = "./resources/config/interfaceConfigAdminCampaña.json";
 	
 	
 	private static final String CONFIG_TABLAS = "./resources/config/TablasBD_A.json"; 
@@ -67,7 +69,7 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 		
 		ImageIcon icono= new ImageIcon("./resources/config/icono.jpg");
 		
-		String resp = (String) JOptionPane.showInputDialog(this, "Seleccione una carrera a cursar", "Carrera", JOptionPane.DEFAULT_OPTION,icono, usuarios, usuarios[0]);
+		String resp = (String) JOptionPane.showInputDialog(this, "Seleccione su perfil de usuario", "Carrera", JOptionPane.DEFAULT_OPTION,icono, usuarios, usuarios[0]);
 		
 		if(resp.equals("Afiliado"))
 		{
@@ -99,6 +101,7 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
         
         tableConfig = openConfig ("Tablas BD", CONFIG_TABLAS);
         epsAndes = new EpsAndes (tableConfig);
+        
         
     	String path = guiConfig.get("bannerPath").getAsString();
         panelDatos = new PanelDatos ( );
@@ -196,6 +199,14 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
+		String evento=  arg0.getActionCommand();
+		
+		if(evento.equals("registrarEps"))
+		{
+			
+			epsAndes.agregarEps("Puta Vida", "Ricardo Millos");
+			panelDatos.actualizarInterfaz("Todo bien todo correcto");
+		}
 		
 	}
 	
