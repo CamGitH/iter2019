@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Copy element &apos;interfaceConfigAdmin.json&apos; to &apos;epsAndes-jdo/resources/config&apos;&#x0D;&#x0A;- Original project: &apos;epsAndes-jdo&apos;&#x0D;&#x0A;- Destination element: &apos;epsAndes-jdo/resources/config&apos;&#x0D;&#x0A;- Original element: &apos;interfaceConfigAdmin.json&apos;" description="Copy file" destination="/resources&lt;config" element1="resources/config/interfaceConfigAdmin.json" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1572453909007" units="0" version="1.0"/>
-</session>
