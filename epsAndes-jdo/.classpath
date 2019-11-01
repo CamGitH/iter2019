@@ -4,6 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="resources"/>
+	<classpathentry kind="src" path="tests"/>
 	<classpathentry kind="lib" path="lib/datanucleus-api-jdo-5.1.7.jar"/>
 	<classpathentry kind="lib" path="lib/datanucleus-core-5.1.10.jar"/>
 	<classpathentry kind="lib" path="lib/datanucleus-rdbms-5.1.10.jar"/>
