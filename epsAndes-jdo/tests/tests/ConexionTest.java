@@ -1,21 +1,8 @@
-/**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- * Universidad	de	los	Andes	(Bogotá	- Colombia)
- * Departamento	de	Ingeniería	de	Sistemas	y	Computación
- * Licenciado	bajo	el	esquema	Academic Free License versión 2.1
- * 		
- * Curso: isis2304 - Sistemas Transaccionales
- * Proyecto: Parranderos Uniandes
- * @version 1.0
- * @author Germán Bravo
- * Julio de 2018
- * 
- * Revisado por: Claudia Jiménez, Christian Ariza
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- */
+package tests;
 
-patestss.test;
 
 import static org.junit.Assert.assertEquals;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -28,12 +15,12 @@ import org.junit.Test;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
-import uniandes.isis2304.parranderos.negocio.Parranderos;
-import uniandes.isis2304.parranderos.negocio.VOTipoBebida;
+
+import negocio.EpsAndes;
 
 /**
- * Clase con métodos de prueba de conexión a la base de datos
- * @author Germán Bravo
+ * @author Camilo Otalora
+ * Basado en el ejemplo de parranderos
  *
  */
 public class ConexionTest
@@ -77,7 +64,7 @@ public class ConexionTest
 	/**
 	 * La clase que se quiere probar
 	 */
-    private Parranderos parranderos;
+    private EpsAndes eps;
 	
 	/* ****************************************************************
 	 * 			Métodos de prueba de acceso a la BD
@@ -91,11 +78,11 @@ public class ConexionTest
   	  	try
 		{
 			log.info ("Probando el acceso a la base de datos con datos válidos (BD, credenciales, esquema");
-			parranderos = new Parranderos (openConfig (CONFIG_TABLAS_A));
+			eps = new EpsAndes (openConfig (CONFIG_TABLAS_A));
 			log.info ("Conexión realizada correstamente");
 			log.info ("Cerrando la conexión");
 			
-			parranderos.cerrarUnidadPersistencia ();
+			eps.cerrarUnidadPersistencia ();
 			log.info ("Conexión cerrada");
 		}
 		catch (Exception e)
@@ -122,7 +109,7 @@ public class ConexionTest
 		try
 		{
 	    	log.info ("Probando el acceso a la base de datos con una base de datos que no existe");
-			parranderos = new Parranderos (openConfig (CONFIG_TABLAS_ERR_DS));
+			eps = new EpsAndes (openConfig (CONFIG_TABLAS_ERR_DS));
 			fail ("Debería fallar. La base de datos no existe !!");
 		}
 		catch (Exception e)
@@ -147,7 +134,7 @@ public class ConexionTest
 		try
 		{
 	    	log.info ("Probando el acceso a la base de datos con datos de usuario incorrectos");
-			parranderos = new Parranderos (openConfig (CONFIG_TABLAS_ERR_USER));
+			eps = new EpsAndes (openConfig (CONFIG_TABLAS_ERR_USER));
 			fail ("Debería fallar. Las credenciales del usuario no son válidas");
 		}
 		catch (Exception e)
@@ -166,49 +153,49 @@ public class ConexionTest
      * Método que prueba el intento de acceso a una base de datos inaccesible, por causa:
      * 1. El esquema no ha sido creado o es erróneo - Intentar acceder a una tabla inexistente
      */
-    @Test
-    public void tablaInexistenteTest ()
-    {
-    	// Probar primero la conexión a la base de datos
-		try
-		{
-	    	log.info ("Probando el acceso a la base de datos con datos de usuario correctos, pero sin crear el esquema");
-			parranderos = new Parranderos (openConfig (CONFIG_TABLAS_B));
-		}
-		catch (Exception e)
-		{
-//			e.printStackTrace();
-			log.info ("Prueba de tabla inexistente incompleta. No se pudo conectar a la base de datos !!. La excepción generada es: " + e.getClass ().getName ());
-			log.info ("La causa es: " + e.getCause ().toString ());
-
-			String msg = "Prueba de tabla inexistente incompleta. No se pudo conectar a la base de datos !!.\n";
-			msg += "Revise el log de parranderos y el de datanucleus para conocer el detalle de la excepción";
-			System.out.println (msg);
-			fail (msg);
-		}
-		
-		// Ahora si se puede probar si la tabla existe o no...
-		try
-		{
-			parranderos.darTiposBebida ();
-			fail ("Debería fallar. La tabla consultada no existe en la BD");
-		}
-		catch (Exception e)
-		{
-//			e.printStackTrace();
-			log.info ("Prueba de tabla inexistente correcta. La excepción generada es: " + e.getClass ().getName ());
-			log.info ("La causa es: " + e.getCause ().toString ());
-
-			String msg = "Prueba de tabla inexistente correcta.\n";
-			msg += "Revise el log de parranderos y el de datanucleus para conocer el detalle de la excepción";
-			System.out.println (msg);
-		}
-		finally
-		{
-			parranderos.limpiarParranderos ();
-    		parranderos.cerrarUnidadPersistencia ();    		
-		}
-    }
+//    @Test
+//    public void tablaInexistenteTest ()
+//    {
+//    	// Probar primero la conexión a la base de datos
+//		try
+//		{
+//	    	log.info ("Probando el acceso a la base de datos con datos de usuario correctos, pero sin crear el esquema");
+//			eps = new eps (openConfig (CONFIG_TABLAS_B));
+//		}
+//		catch (Exception e)
+//		{
+////			e.printStackTrace();
+//			log.info ("Prueba de tabla inexistente incompleta. No se pudo conectar a la base de datos !!. La excepción generada es: " + e.getClass ().getName ());
+//			log.info ("La causa es: " + e.getCause ().toString ());
+//
+//			String msg = "Prueba de tabla inexistente incompleta. No se pudo conectar a la base de datos !!.\n";
+//			msg += "Revise el log de eps y el de datanucleus para conocer el detalle de la excepción";
+//			System.out.println (msg);
+//			fail (msg);
+//		}
+//		
+//		// Ahora si se puede probar si la tabla existe o no...
+//		try
+//		{
+//			eps.darTiposBebida ();
+//			fail ("Debería fallar. La tabla consultada no existe en la BD");
+//		}
+//		catch (Exception e)
+//		{
+////			e.printStackTrace();
+//			log.info ("Prueba de tabla inexistente correcta. La excepción generada es: " + e.getClass ().getName ());
+//			log.info ("La causa es: " + e.getCause ().toString ());
+//
+//			String msg = "Prueba de tabla inexistente correcta.\n";
+//			msg += "Revise el log de eps y el de datanucleus para conocer el detalle de la excepción";
+//			System.out.println (msg);
+//		}
+//		finally
+//		{
+//			eps.limpiareps ();
+//    		eps.cerrarUnidadPersistencia ();    		
+//		}
+//    }
 
 	/* ****************************************************************
 	 * 			Métodos de configuración
