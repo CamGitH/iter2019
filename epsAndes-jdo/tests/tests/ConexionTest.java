@@ -19,7 +19,6 @@ import com.google.gson.stream.JsonReader;
 import negocio.EpsAndes;
 
 /**
- * @author Camilo Otalora
  * Basado en el ejemplo de parranderos
  *
  */

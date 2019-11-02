@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /**~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  * Universidad	de	los	Andes	(Bogotá	- Colombia)
 
@@ -15,6 +16,9 @@
  */
 
 package tests;
+=======
+patestss.test;
+>>>>>>> 09749bd834d18b5faef373f61786790a7a133cb6
 
 import static org.junit.Assert.assertEquals;
 
@@ -33,11 +37,7 @@ import com.google.gson.stream.JsonReader;
 
 import negocio.EpsAndes;
 
-/**
- * Clase con los métdos de prueba de funcionalidad sobre TIPOBEBIDA
- * @author Germán Bravo
- *
- */
+
 public class TipoBebidaTest
 {
 	/* ****************************************************************
