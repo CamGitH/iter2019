@@ -29,8 +29,8 @@
 					"event": "reservarConsultasOdontologicas"
 				},
 				{
-					"label": "RegistrarOr",
-					"event": "registrarOrdenDeServicio"
+					"label": "Reservar Jornadas de vacunacion",
+					"event": "registrarJornadaVacunacion"
 				}
 			]
 		},

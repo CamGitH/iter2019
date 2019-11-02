@@ -2,12 +2,14 @@ package interfazApp;
 
 import java.awt.BorderLayout;
 
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileReader;
 
+import javax.jdo.JDODataStoreException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,8 +27,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
+import negocio.Eps;
 import negocio.EpsAndes;
-
 
 
 
@@ -195,6 +197,58 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
         setTitle( titulo );
 		setSize ( ancho, alto);        
     }
+	
+	
+	public void adicionarEps()
+	{
+		try 
+    	{
+    		String nombreEps = JOptionPane.showInputDialog (this, "Nombre de la eps?", "Adicionar Eps", JOptionPane.QUESTION_MESSAGE);
+    		String nombreGerente=JOptionPane.showInputDialog (this, "Nombre del Gerente?", "Adicionar Gerente", JOptionPane.QUESTION_MESSAGE);
+    		if (nombreEps != null&& nombreGerente != null)
+    		{
+    			Eps tb = epsAndes.agregarEps(nombreEps, nombreGerente);
+        		if (tb == null)
+        		{
+        			throw new Exception ("No se pudo crear una eps con este nombre: " + nombreEps);
+        		}
+        		String resultado = "En adicionar Eps\n\n";
+        		resultado += "Eps adicionada exitosamente: " + tb;
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	private String darDetalleException(Exception e) 
+	{
+		String resp = "";
+		if (e.getClass().getName().equals("javax.jdo.JDODataStoreException"))
+		{
+			JDODataStoreException je = (javax.jdo.JDODataStoreException) e;
+			return je.getNestedExceptions() [0].getMessage();
+		}
+		return resp;
+	}
+	
+	
+	private String generarMensajeError(Exception e) 
+	{
+		String resultado = "************ Error en la ejecución\n";
+		resultado += e.getLocalizedMessage() + ", " + darDetalleException(e);
+		resultado += "\n\nRevise datanucleus.log y parranderos.log para más detalles";
+		return resultado;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
@@ -204,7 +258,7 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 		if(evento.equals("registrarEps"))
 		{
 			
-			epsAndes.agregarEps("Puta Vida", "Ricardo Millos");
+			epsAndes.agregarEps("Yuyeimi", "Ricardo Millos");
 			panelDatos.actualizarInterfaz("Todo bien todo correcto");
 		}
 		
