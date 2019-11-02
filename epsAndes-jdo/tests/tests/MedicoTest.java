@@ -17,7 +17,7 @@ import uniandes.isis2304.parranderos.negocio.Parranderos;
 import uniandes.isis2304.parranderos.negocio.VOTipoBebida;
 
 
-public class TipoBebidaTest
+public class MedicoTest
 {
 	/* ****************************************************************
 	 * 			Constantes
@@ -25,27 +25,27 @@ public class TipoBebidaTest
 	/**
 	 * Logger para escribir la traza de la ejecución
 	 */
-	private static Logger log = Logger.getLogger(TipoBebidaTest.class.getName());
-	
+	private static Logger log = Logger.getLogger(MedicoTest.class.getName());
+
 	/**
 	 * Ruta al archivo de configuración de los nombres de tablas de la base de datos: La unidad de persistencia existe y el esquema de la BD también
 	 */
-	private static final String CONFIG_TABLAS_A = "./src/main/resources/config/TablasBD_A.json"; 
-	
+	private static final String CONFIG_TABLAS_A = "./src/main/resources/config/TablasBD_A.json";
+
 	/* ****************************************************************
 	 * 			Atributos
 	 *****************************************************************/
-    /**
-     * Objeto JSON con los nombres de las tablas de la base de datos que se quieren utilizar
-     */
-    private JsonObject tableConfig;
-    
+	/**
+	 * Objeto JSON con los nombres de las tablas de la base de datos que se quieren utilizar
+	 */
+	private JsonObject tableConfig;
+
 	/**
 	 * La clase que se quiere probar
 	 */
-    private Parranderos parranderos;
-	
-    /* ****************************************************************
+	private Parranderos parranderos;
+
+	/* ****************************************************************
 	 * 			Métodos de prueba para la tabla TipoBebida - Creación y borrado
 	 *****************************************************************/
 	/**
@@ -55,10 +55,10 @@ public class TipoBebidaTest
 	 * 3. Borrar un tipo de bebida por su identificador
 	 * 4. Borrar un tipo de bebida por su nombre
 	 */
-    @Test
-	public void CRDTipoBebidaTest() 
+	@Test
+	public void CRDTipoBebidaTest()
 	{
-    	// Probar primero la conexión a la base de datos
+		// Probar primero la conexión a la base de datos
 		try
 		{
 			log.info ("Probando las operaciones CRD sobre TipoBebida");
@@ -75,9 +75,9 @@ public class TipoBebidaTest
 			System.out.println (msg);
 			fail (msg);
 		}
-		
+
 		// Ahora si se pueden probar las operaciones
-    	try
+		try
 		{
 			// Lectura de los tipos de bebida con la tabla vacía
 			List <VOTipoBebida> lista = parranderos.darVOTiposBebida();
@@ -105,7 +105,7 @@ public class TipoBebidaTest
 			assertEquals ("Debe haber un solo tipo de bebida !!", 1, lista.size ());
 			assertFalse ("El primer tipo de bebida adicionado NO debe estar en la tabla", tipoBebida1.equals (lista.get (0)));
 			assertTrue ("El segundo tipo de bebida adicionado debe estar en la tabla", tipoBebida2.equals (lista.get (0)));
-			
+
 			// Prueba de eliminación de un tipo de bebida, dado su identificador
 			tbEliminados = parranderos.eliminarTipoBebidaPorNombre (nombreTipoBebida2);
 			assertEquals ("Debe haberse eliminado un tipo de bebida !!", 1, tbEliminados);
@@ -119,22 +119,22 @@ public class TipoBebidaTest
 			msg += "Revise el log de parranderos y el de datanucleus para conocer el detalle de la excepción";
 			System.out.println (msg);
 
-    		fail ("Error en las pruebas sobre la tabla TipoBebida");
+			fail ("Error en las pruebas sobre la tabla TipoBebida");
 		}
 		finally
 		{
 			parranderos.limpiarParranderos ();
-    		parranderos.cerrarUnidadPersistencia ();    		
+			parranderos.cerrarUnidadPersistencia ();
 		}
 	}
 
-    /**
-     * Método de prueba de la restricción de unicidad sobre el nombre de TipoBebida
-     */
+	/**
+	 * Método de prueba de la restricción de unicidad sobre el nombre de TipoBebida
+	 */
 	@Test
-	public void unicidadTipoBebidaTest() 
+	public void unicidadTipoBebidaTest()
 	{
-    	// Probar primero la conexión a la base de datos
+		// Probar primero la conexión a la base de datos
 		try
 		{
 			log.info ("Probando la restricción de UNICIDAD del nombre del tipo de bebida");
@@ -151,7 +151,7 @@ public class TipoBebidaTest
 			System.out.println (msg);
 			fail (msg);
 		}
-		
+
 		// Ahora si se pueden probar las operaciones
 		try
 		{
@@ -175,42 +175,42 @@ public class TipoBebidaTest
 			msg += "Revise el log de parranderos y el de datanucleus para conocer el detalle de la excepción";
 			System.out.println (msg);
 
-    		fail ("Error en las pruebas de UNICIDAD sobre la tabla TipoBebida");
-		}    				
+			fail ("Error en las pruebas de UNICIDAD sobre la tabla TipoBebida");
+		}
 		finally
 		{
 			parranderos.limpiarParranderos ();
-    		parranderos.cerrarUnidadPersistencia ();    		
+			parranderos.cerrarUnidadPersistencia ();
 		}
 	}
 
 	/* ****************************************************************
 	 * 			Métodos de configuración
 	 *****************************************************************/
-    /**
-     * Lee datos de configuración para la aplicación, a partir de un archivo JSON o con valores por defecto si hay errores.
-     * @param tipo - El tipo de configuración deseada
-     * @param archConfig - Archivo Json que contiene la configuración
-     * @return Un objeto JSON con la configuración del tipo especificado
-     * 			NULL si hay un error en el archivo.
-     */
-    private JsonObject openConfig (String archConfig)
-    {
-    	JsonObject config = null;
-		try 
+	/**
+	 * Lee datos de configuración para la aplicación, a partir de un archivo JSON o con valores por defecto si hay errores.
+	 * @param tipo - El tipo de configuración deseada
+	 * @param archConfig - Archivo Json que contiene la configuración
+	 * @return Un objeto JSON con la configuración del tipo especificado
+	 * 			NULL si hay un error en el archivo.
+	 */
+	private JsonObject openConfig (String archConfig)
+	{
+		JsonObject config = null;
+		try
 		{
 			Gson gson = new Gson( );
 			FileReader file = new FileReader (archConfig);
 			JsonReader reader = new JsonReader ( file );
 			config = gson.fromJson(reader, JsonObject.class);
 			log.info ("Se encontró un archivo de configuración de tablas válido");
-		} 
+		}
 		catch (Exception e)
 		{
 //			e.printStackTrace ();
-			log.info ("NO se encontró un archivo de configuración válido");			
+			log.info ("NO se encontró un archivo de configuración válido");
 			JOptionPane.showMessageDialog(null, "No se encontró un archivo de configuración de tablas válido: ", "TipoBebidaTest", JOptionPane.ERROR_MESSAGE);
-		}	
-        return config;
-    }	
+		}
+		return config;
+	}
 }
