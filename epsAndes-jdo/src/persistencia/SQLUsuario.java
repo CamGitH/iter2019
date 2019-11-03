@@ -41,7 +41,8 @@ public class SQLUsuario {
 		q.setResultClass(Usuario.class);
 		return (List<Usuario>) q.executeList();
 	}
-	
+
+
 	
 	
 }
