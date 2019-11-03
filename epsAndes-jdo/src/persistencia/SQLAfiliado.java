@@ -7,6 +7,7 @@ import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
 import negocio.Afiliado;
+import negocio.Servicio;
 
 
 public class SQLAfiliado {
@@ -52,9 +53,24 @@ private final static String SQL = PersistenciaEpsAndes.SQL;
 		q.setParameters(idAfiliado, codigoSevicio);
         return (long) q.executeUnique();
 	}
-	
-	
-	
-	
 
+	public List<Servicio> rfc6 (PersistenceManager pm, Date tiempo, Long codigoServicio)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pe.darTablaServicio ());
+		q.setResultClass(Servicio.class);
+		return (List<Servicio>) q.executeList();
+	}
+
+	public List<Afiliado> rfc7 (PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pe.darTablaAfiliado ()+ "WHERE ORDEN_DE_SERVICIO>=12");
+		q.setResultClass(Afiliado.class);
+		return (List<Afiliado>) q.executeList();
+	}
+	public List<Servicio> rfc8 (PersistenceManager pm)
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pe.darTablaServicio () +  "WHERE ORDEN_DE_SERVICIO<=3");
+		q.setResultClass(Servicio.class);
+		return (List<Servicio>) q.executeList();
+	}
 }
