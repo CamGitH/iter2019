@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class CampañaPrevencion implements VOCampañaPrevencion{
 	
 	
-	private String nombre;
+	private long id;
 	
 	private int afiliadosEsperados;
 	
@@ -20,7 +20,7 @@ public class CampañaPrevencion implements VOCampañaPrevencion{
 	
 	public CampañaPrevencion()
 	{
-		this.nombre="";
+		this.id=0;
 		this.afiliadosEsperados=0;
 		this.fechaInicial= null;
 		this.fechaFinal=null;
@@ -29,9 +29,9 @@ public class CampañaPrevencion implements VOCampañaPrevencion{
 		
 	}
 	
-	public CampañaPrevencion(String pNombre, int pAfiliados, Date pFechaInicial, Date pFechaFinal)
+	public CampañaPrevencion(long pId, int pAfiliados, Date pFechaInicial, Date pFechaFinal)
 	{
-		this.setNombre(pNombre);
+		this.setId(pId);
 		this.setAfiliadosEsperados(pAfiliados);
 		this.setFechaInicial(pFechaInicial);
 		this.setFechaFinal(pFechaFinal);
@@ -85,12 +85,12 @@ public class CampañaPrevencion implements VOCampañaPrevencion{
 		this.afiliadosEsperados = afiliadosEsperados;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public long getId() {
+		return id;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setId(long pId) {
+		this.id = pId;
 	}
 	
 	

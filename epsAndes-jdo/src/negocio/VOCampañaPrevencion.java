@@ -8,7 +8,7 @@ public interface VOCampañaPrevencion {
 	/**
 	 * @return  NombreCampaña
 	 */
-	public String getNombre();
+	public long getId();
 	
 	/**
 	 * @return  afiliadosEsperados

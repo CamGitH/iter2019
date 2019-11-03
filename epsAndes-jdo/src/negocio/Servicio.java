@@ -16,12 +16,12 @@ public class Servicio implements VOServicio{
 	 * 			Atributos
 	 ***********************/
 
-	protected Long codigoServicio;
+	protected long codigoServicio;
 	protected String horario;
 	protected int capacidad;
 	protected String IPS;
 	protected String orden;
-	protected String afiliado;
+	protected int reservas;
 	private TipoServicio tipo;
 
 	/* **********************
@@ -37,21 +37,21 @@ public class Servicio implements VOServicio{
 		this.setCapacidad(0);
 		this.setIPS("");
 		this.setOrden("");
-		this.setAfiliado("");
+		this.setReservas(0);
 		this.setTipo(null);
 	}
 
 	/**
 	 * Constructor con valores
 	 */
-	public Servicio (Long cod, String h, int cap, String ip, String o, String a, TipoServicio pTipo) 
+	public Servicio (Long cod, String h, int cap, String ip, String o, int pReservas, TipoServicio pTipo) 
 	{
 		this.setCodigoServicio(cod);
 		this.setHorario(h);
 		this.setCapacidad(cap);
 		this.setIPS(ip);
 		this.setOrden(o);
-		this.setAfiliado(a);
+		this.setReservas(pReservas);
 		this.setTipo(pTipo);
 	}
 
@@ -63,7 +63,7 @@ public class Servicio implements VOServicio{
 	@Override
 	public String toString() 
 	{
-		return "Servicio ["+ codigoServicio + ", "+ horario + ", "+ capacidad + ", "+ IPS + ", " + orden + ", " + afiliado + "]";
+		return "Servicio ["+ codigoServicio + ", "+ horario + ", "+ capacidad + ", "+ IPS + ", " + orden + ", " + reservas + "]";
 	}
 
 	public void setCapacidad(int pcapacidad) {
@@ -95,12 +95,12 @@ public class Servicio implements VOServicio{
 		IPS = iPS;
 	}
 
-	public String getAfiliado() {
-		return afiliado;
+	public int getReservas() {
+		return reservas;
 	}
 
-	public void setAfiliado(String afiliado) {
-		this.afiliado = afiliado;
+	public void setReservas(int pReservas) {
+		this.reservas = pReservas;
 	}
 
 	@Override

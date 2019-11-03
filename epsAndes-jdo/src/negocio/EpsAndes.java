@@ -102,6 +102,18 @@ public class EpsAndes {
         return servicios;
 	}
 	
+	public long reservarServicio(long pCodigo, int pReservas) {
+		
+		return pe.reservarServicio(pCodigo, pReservas);
+		
+	}
+	
+	public Servicio darServiciosporNombre(String pNombre)
+	{
+		log.info ("Consultando Servicios");
+        List<Servicio> servicios = pe.darServicioPorNombre(pNombre);
+        return !servicios.isEmpty () ? servicios.get (0) : null;
+	}
 	
 	
 	

@@ -30,7 +30,7 @@ public interface VOServicio{
 	public String getOrden();
 	
 	/**
-	 * @return  Afiliado
+	 * @return  Reservas
 	 */
-	public String getAfiliado();
+	public int getReservas();
 }

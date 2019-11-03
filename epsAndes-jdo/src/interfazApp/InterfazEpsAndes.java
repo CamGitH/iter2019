@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 import javax.jdo.JDODataStoreException;
 import javax.swing.ImageIcon;
@@ -27,8 +28,10 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
 
+import negocio.CampañaPrevencion;
 import negocio.Eps;
 import negocio.EpsAndes;
+import negocio.Servicio;
 
 
 
@@ -230,6 +233,85 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 		}
 	}
 	
+	
+	public void RegistrarCampaña()
+	{
+		try 
+    	{
+    		String afiliadosEsperados = JOptionPane.showInputDialog (this, "ingrese el numero de afiliados esperados en la campaña?", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
+    		String fechaInicial=JOptionPane.showInputDialog (this, "Nombre del Gerente?", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
+    		String fechaFinal=JOptionPane.showInputDialog (this, "Nombre del Gerente?", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
+    		String servicios=JOptionPane.showInputDialog (this, "Ingrese los servicios que desea para la campaña separados por comas", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
+    		String capacidades=JOptionPane.showInputDialog (this, "Ingrese los servicios que desea para la campaña separados por comas", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
+    		ArrayList<Servicio> serviciosRegistrados= new ArrayList<Servicio>();
+    		ArrayList<Servicio> servciosNoRegistrados= new ArrayList<Servicio>();
+    		if (afiliadosEsperados != null&& fechaFinal != null&& fechaInicial != null && servicios !=null && capacidades !=null)
+    		{
+    			String []listaServicios= servicios.split(",");
+    			String [] listaCapacidades= capacidades.split(",");
+    			
+
+    			for (int i = 0; i < listaServicios.length; i++) {
+					
+    				Servicio buscado= epsAndes.darServiciosporNombre(listaServicios[i]);
+    				if(buscado!=null)
+    				{
+    					if(buscado.getCapacidad()<=Integer.parseInt(listaCapacidades[i]))
+    					{
+    						serviciosRegistrados.add(buscado);
+    					}
+    					else
+    					{
+    						servciosNoRegistrados.add(buscado);
+    					}
+    				}
+    				else
+    				{
+    					servciosNoRegistrados.add(buscado);
+    				}
+				}
+    			if(!servciosNoRegistrados.isEmpty())
+    			{
+    				String resp="No se pudo crear esta campaña porque estos servicios no estan disponibles: ";
+    				for (int i = 0; i < servciosNoRegistrados.size(); i++) {
+						resp+=servciosNoRegistrados.get(i).getTipo();
+					}
+    				
+    				throw new Exception(resp);
+    			}
+    			else
+    			{
+    				for (int i = 0; i < serviciosRegistrados.size(); i++) {
+						epsAndes.reservarServicio(serviciosRegistrados.get(i).getCodigoServicio(), Integer.parseInt(listaCapacidades[i]));
+					}
+    			
+    			CampañaPrevencion tb = epsAndes.agregarEps(nombreEps, nombreGerente);
+        		if (tb == null)
+        		{
+        			throw new Exception ("No se pudo crear una eps con este nombre: " + nombreEps);
+        		}
+        		String resultado = "En adicionar Eps\n\n";
+        		resultado += "Eps adicionada exitosamente: " + tb;
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    			}
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	
+	
+	
 	private String darDetalleException(Exception e) 
 	{
 		String resp = "";
@@ -246,7 +328,6 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 	{
 		String resultado = "************ Error en la ejecución\n";
 		resultado += e.getLocalizedMessage() + ", " + darDetalleException(e);
-		resultado += "\n\nRevise datanucleus.log y parranderos.log para más detalles";
 		return resultado;
 	}
 

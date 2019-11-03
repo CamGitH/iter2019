@@ -477,11 +477,6 @@ public class PersistenciaEpsAndes {
 		return sqlMedicoGeneral.darMedicosGenerales (pmf.getPersistenceManager());
 	}
 	
-	public List<Servicio> darServicios()
-	{
-		return sqlServicio.darServicios(pmf.getPersistenceManager());
-	}
-	
 	
 	public MedicoEspecialista adicionarMedicoEspecialista( String pEspeci)
 	{
@@ -547,6 +542,47 @@ public class PersistenciaEpsAndes {
 	{
 		return sqlMedicoEspecialista.darMedicosEspecialistas (pmf.getPersistenceManager());
 	}
+	
+	public List<Servicio> darServicios()
+	{
+		return sqlServicio.darServicios(pmf.getPersistenceManager());
+	}
+	
+	public List<Servicio> darServicioPorNombre( String pNombre)
+	{
+		return sqlServicio.darServiciosPorNombre(pmf.getPersistenceManager(), pNombre);
+	}
+	
+	public long reservarServicio (long pCodigo, int pReservas)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlServicio.reservarServicio(pm, pReservas, pCodigo);
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	
+	
 	
 	
 }
