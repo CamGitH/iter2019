@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileReader;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import javax.jdo.JDODataStoreException;
@@ -234,13 +235,13 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 	}
 	
 	
-	public void RegistrarCampaña()
+	public void registrarCampaña()
 	{
 		try 
     	{
     		String afiliadosEsperados = JOptionPane.showInputDialog (this, "ingrese el numero de afiliados esperados en la campaña?", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
-    		String fechaInicial=JOptionPane.showInputDialog (this, "Nombre del Gerente?", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
-    		String fechaFinal=JOptionPane.showInputDialog (this, "Nombre del Gerente?", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
+    		String fechaInicial=JOptionPane.showInputDialog (this, "Ingrese la fecha inicial de la campaña siguiendo el formato yyyy-mm-dd. Ej: 2019-12-24", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
+    		String fechaFinal=JOptionPane.showInputDialog (this, "Ingrese la fecha final de la campaña siguiendo el formato yyyy-mm-dd. Ej: 2019-12-24", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
     		String servicios=JOptionPane.showInputDialog (this, "Ingrese los servicios que desea para la campaña separados por comas", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
     		String capacidades=JOptionPane.showInputDialog (this, "Ingrese los servicios que desea para la campaña separados por comas", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
     		ArrayList<Servicio> serviciosRegistrados= new ArrayList<Servicio>();
@@ -284,14 +285,15 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
     				for (int i = 0; i < serviciosRegistrados.size(); i++) {
 						epsAndes.reservarServicio(serviciosRegistrados.get(i).getCodigoServicio(), Integer.parseInt(listaCapacidades[i]));
 					}
+    				
     			
-    			CampañaPrevencion tb = epsAndes.agregarEps(nombreEps, nombreGerente);
+    			CampañaPrevencion tb = epsAndes.registrarCampañaPrevencion(Integer.parseInt(afiliadosEsperados), Date.valueOf(fechaInicial), Date.valueOf(fechaFinal));
         		if (tb == null)
         		{
-        			throw new Exception ("No se pudo crear una eps con este nombre: " + nombreEps);
+        			throw new Exception ("No se pudo crear esta campaña");
         		}
-        		String resultado = "En adicionar Eps\n\n";
-        		resultado += "Eps adicionada exitosamente: " + tb;
+        		String resultado = "En registrar una campaña\n\n";
+        		resultado += "Campaña adicionada exitosamente: " + tb;
     			resultado += "\n Operación terminada";
     			panelDatos.actualizarInterfaz(resultado);
     			}
@@ -338,9 +340,11 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 		
 		if(evento.equals("registrarEps"))
 		{
-			
-			epsAndes.agregarEps("Yuyeimi", "Ricardo Millos");
-			panelDatos.actualizarInterfaz("Todo bien todo correcto");
+			this.adicionarEps();
+		}
+		if(evento.equals("reservarCampaña"))
+		{
+			this.registrarCampaña();
 		}
 		
 	}

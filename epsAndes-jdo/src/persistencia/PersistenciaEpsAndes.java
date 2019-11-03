@@ -19,6 +19,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import negocio.Afiliado;
+import negocio.CampañaPrevencion;
 import negocio.Eps;
 import negocio.MedicoEspecialista;
 import negocio.MedicoGeneral;
@@ -52,6 +53,8 @@ public class PersistenciaEpsAndes {
 	
 	private SQLAfiliado sqlAfiliado;
 	
+	private SQLCampañaDePrevencion sqlCampañaPrevencion;
+	
 	private SQLConsulta sqlConsulta;
 	
 	private SQLIps sqlIps;
@@ -83,6 +86,7 @@ public class PersistenciaEpsAndes {
 		tablas.add("EpsAndes_sequence");
 		tablas.add("EPS");
 		tablas.add("AFILIADO");
+		tablas.add("CDEPREVENCION");
 		tablas.add("CONSULTA");
 		tablas.add("IPS");
 		tablas.add("MEDICAMENTO");
@@ -138,6 +142,7 @@ public class PersistenciaEpsAndes {
 		
 		sqlEps= new SQLEps(this);
 		sqlAfiliado= new SQLAfiliado(this);
+		sqlCampañaPrevencion= new SQLCampañaDePrevencion(this);
 		sqlConsulta= new SQLConsulta(this);
 		sqlIps= new SQLIps(this);
 		sqlMedicamento= new SQLMedicamento(this);
@@ -178,60 +183,65 @@ public class PersistenciaEpsAndes {
 	{
 		return tablas.get(2);
 	}
-	public String darTablaConsulta()
+	
+	public String darTablaCDprevencion()
 	{
 		return tablas.get(3);
 	}
-	
-	public String darTablaIps()
+	public String darTablaConsulta()
 	{
 		return tablas.get(4);
 	}
 	
-	public String darTablaMedicamento()
+	public String darTablaIps()
 	{
 		return tablas.get(5);
 	}
 	
-	public String darTablaMedico()
+	public String darTablaMedicamento()
 	{
 		return tablas.get(6);
+	}
+	
+	public String darTablaMedico()
+	{
+		return tablas.get(7);
 	}
 	
 	
 	public String darTablaMedicoEspecialista()
 	{
-		return tablas.get(7);
+		return tablas.get(8);
 	}
 	
 	public String darTablaMedicoGeneral()
 	{
-		return tablas.get(8);
+		return tablas.get(9);
 	}
 
 	public String darTablaOrdenDeServicio()
 	{
-		return tablas.get(9);
+		return tablas.get(10);
 	}
 	
 	public String darTablaReceta()
 	{
-		return tablas.get(10);
+		return tablas.get(11);
 	}
 	
 	public String darTablaServicio()
 	{
-		return tablas.get(11);
+		return tablas.get(12);
 	}
 	
 	public String darTablaUsuario()
 	{
-		return tablas.get(12);
+		return tablas.get(13);
 	}
 	
 	public String darTablaRecetan()
 	{
-		return tablas.get(13);
+		return tablas.get(14);
 	}
 	
 	private long nextval ()
@@ -346,6 +356,37 @@ public class PersistenciaEpsAndes {
 	public List<Usuario> darUsuarios ()
 	{
 		return sqlUsuario.darUsuarios (pmf.getPersistenceManager());
+	}
+	
+	public CampañaPrevencion registrarCampaña(int pAfiliados, Date pFechaI, Date pFechaF)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long idCampaña = nextval ();
+            long tuplasInsertadas = sqlCampañaPrevencion.registrarCampañaDePrevencion(pm, idCampaña, pAfiliados, pFechaI, pFechaF);
+            tx.commit();
+            
+            log.trace ("Inserción de afiliado: " + idCampaña + ": " + tuplasInsertadas + " tuplas insertadas");
+            
+            return new CampañaPrevencion(idCampaña, pAfiliados, pFechaI, pFechaF);
+        }
+        catch (Exception e)
+        {
+
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
 	}
 	
 	public Afiliado adicionarAfiliado(Date pFecha, String pOrden)

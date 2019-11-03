@@ -45,6 +45,15 @@ public class EpsAndes {
         return eps;
 	}
 	
+	public CampañaPrevencion registrarCampañaPrevencion( int pAfiliados, Date pFechaI, Date pFechaF)
+	{
+		log.info ("Adicionando campaña de prevencion ");
+		CampañaPrevencion campaña = pe.registrarCampaña(pAfiliados, pFechaI, pFechaF);
+        log.info ("Adicionando campaña: " + campaña);
+        return campaña;
+	}
+	
+	
 	public Usuario agregarUsuario(String correo, String nombre, String apellido, String tipoId, String nombreEps)
 	{
 		log.info ("Adicionando usuario " + nombre);

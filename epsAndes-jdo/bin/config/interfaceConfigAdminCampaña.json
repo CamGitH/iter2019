@@ -17,8 +17,8 @@
 					"event": "reservarConsultasMedicoEspecilista"
 				},
 				{
-					"label":"Reservar Examenes de Sangre",
-					"event":"reservarExamenesSangre"
+					"label":"Registrar Campaña de prevencion",
+					"event":"reservarCampaña"
 				},
 				{
 					"label":"Reservar Radiografias",
