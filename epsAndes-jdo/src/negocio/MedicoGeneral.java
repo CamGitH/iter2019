@@ -1,16 +1,16 @@
 package negocio;
 
-public class MedicoGeneral implements VOMedico{
+public class MedicoGeneral implements VOMedicoGeneral{
 	
-	private String nombre;
+	protected String nombre;
 	
-	private String apellido;
+	protected String apellido;
 	
-	private long id;
+	protected long id;
 	
-	private String registroMedico;
+	protected String registroMedico;
 	
-	private String ips;
+	protected String ips;
 	
 	public MedicoGeneral()
 	{

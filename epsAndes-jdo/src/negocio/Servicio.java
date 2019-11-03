@@ -1,16 +1,28 @@
 package negocio;
 
 public class Servicio implements VOServicio{
+	
+	
+	public enum TipoServicio
+	{
+		Terapia,
+		Radiografia,
+		Hospitalizacion,
+		ExamenDeSangre,
+		JornadaVacunacion
+		
+	}
 	/* **********************
 	 * 			Atributos
 	 ***********************/
 
-	private Long codigoServicio;
-	private String horario;
-	private int capacidad;
-	private String IPS;
-	private String orden;
-	private String afiliado;
+	protected Long codigoServicio;
+	protected String horario;
+	protected int capacidad;
+	protected String IPS;
+	protected String orden;
+	protected String afiliado;
+	private TipoServicio tipo;
 
 	/* **********************
 	 * 			Métodos
@@ -26,12 +38,13 @@ public class Servicio implements VOServicio{
 		this.setIPS("");
 		this.setOrden("");
 		this.setAfiliado("");
+		this.setTipo(null);
 	}
 
 	/**
 	 * Constructor con valores
 	 */
-	public Servicio (Long cod, String h, int cap, String ip, String o, String a) 
+	public Servicio (Long cod, String h, int cap, String ip, String o, String a, TipoServicio pTipo) 
 	{
 		this.setCodigoServicio(cod);
 		this.setHorario(h);
@@ -39,6 +52,7 @@ public class Servicio implements VOServicio{
 		this.setIPS(ip);
 		this.setOrden(o);
 		this.setAfiliado(a);
+		this.setTipo(pTipo);
 	}
 
 	
@@ -105,6 +119,14 @@ public class Servicio implements VOServicio{
 	public String getIps() {
 		// TODO Auto-generated method stub
 		return IPS;
+	}
+
+	public TipoServicio getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(TipoServicio tipo) {
+		this.tipo = tipo;
 	}
 
 }

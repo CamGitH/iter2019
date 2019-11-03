@@ -1,5 +1,7 @@
 package negocio;
 
+import java.util.ArrayList;
+
 public class Ips implements VOIps{
 	
 	
@@ -11,20 +13,51 @@ public class Ips implements VOIps{
 	
 	private String eps;
 	
+	private ArrayList<Servicio> servicios;
+	
 	public Ips()
 	{
 		this.setNombre("");
 		this.setLocalizacion("");
 		this.setRecepcionista("");
 		this.setEps("");
+		this.setServicios(new ArrayList<Servicio>());
 	}
 	
-	public Ips(String pNombre, String pLoc, String pRec, String pEps)
+	public Ips(String pNombre, String pLoc, String pRec, String pEps, ArrayList<Servicio> pServicios)
 	{
 		this.setNombre(pNombre);
 		this.setLocalizacion(pLoc);
 		this.setRecepcionista(pRec);
 		this.setEps(pEps);
+		this.setServicios(pServicios);
+	}
+	
+	
+	public ArrayList<Servicio> darServicios()
+	{
+		return servicios;
+	}
+	
+	
+	public void setServicios(ArrayList<Servicio> pServicios)
+	{
+		this.servicios=pServicios;
+	}
+	
+	public void añadirServicio( Servicio pServicio)
+	{
+		servicios.add(pServicio);
+	}
+	
+	public void eliminarServicio(Servicio pServicio)
+	{
+		servicios.remove(pServicio);
+	}
+	
+	public void eliminarServicio(int pServicio)
+	{
+		servicios.remove(pServicio);
 	}
 
 	public String getNombre() {

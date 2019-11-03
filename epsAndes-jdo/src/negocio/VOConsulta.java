@@ -12,7 +12,7 @@ public interface VOConsulta{
 	/**
 	 * @return Tipo
 	 */
-	public String getTipo();
+	public String getTipoConsulta();
 
 	/**
 	 * @return Triage

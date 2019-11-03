@@ -4,7 +4,7 @@ public class Consulta extends Servicio implements VOConsulta{
 	
 	private long codigoServicio;
 	
-	private String tipo;
+	private String tipoConsulta;
 	
 	private String triage;
 	
@@ -14,14 +14,14 @@ public class Consulta extends Servicio implements VOConsulta{
 	public Consulta ()
 	{
 		this.setCodigoServicio(0);
-		this.setTipo("");
+		this.setTipoConsulta("");
 		this.setTriage("");
 		this.setReceta("");
 	}
 	public Consulta( Long cod, String pTipo, String pTriage, String pReceta)
 	{
 		this.setCodigoServicio(cod);
-		this.setTipo(pTipo);
+		this.setTipoConsulta(pTipo);
 		this.setTriage(pTriage);
 		this.setReceta(pReceta);
 	}
@@ -34,12 +34,12 @@ public class Consulta extends Servicio implements VOConsulta{
 		this.codigoServicio = codigoServicio;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getTipoConsulta() {
+		return tipoConsulta;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setTipoConsulta(String tipo) {
+		this.tipoConsulta = tipo;
 	}
 
 	public String getTriage() {

@@ -94,6 +94,14 @@ public class EpsAndes {
         return afiliados;
 	}
 	
+	public List<Servicio> darServicios()
+	{
+		log.info ("Consultando Servicios");
+        List<Servicio> servicios = pe.darServicios ();	
+        log.info ("Consultando Servicios: " + servicios.size() + " Servicios existentes");
+        return servicios;
+	}
+	
 	
 	
 	

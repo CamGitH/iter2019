@@ -1,6 +1,7 @@
-patestss.test;
+package tests;
 
 import static org.junit.Assert.assertEquals;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -13,8 +14,6 @@ import org.junit.Test;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.stream.JsonReader;
-import uniandes.isis2304.parranderos.negocio.Parranderos;
-import uniandes.isis2304.parranderos.negocio.VOTipoBebida;
 
 public class CampPrevencionTest
 {

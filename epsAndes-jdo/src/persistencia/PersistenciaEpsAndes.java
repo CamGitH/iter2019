@@ -2,6 +2,7 @@ package persistencia;
 
 import java.sql.Date;
 
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,10 +22,8 @@ import negocio.Afiliado;
 import negocio.Eps;
 import negocio.MedicoEspecialista;
 import negocio.MedicoGeneral;
+import negocio.Servicio;
 import negocio.Usuario;
-
-
-
 
 
 
@@ -476,6 +475,11 @@ public class PersistenciaEpsAndes {
 	public List<MedicoGeneral> darMedicosGenerales ()
 	{
 		return sqlMedicoGeneral.darMedicosGenerales (pmf.getPersistenceManager());
+	}
+	
+	public List<Servicio> darServicios()
+	{
+		return sqlServicio.darServicios(pmf.getPersistenceManager());
 	}
 	
 	
