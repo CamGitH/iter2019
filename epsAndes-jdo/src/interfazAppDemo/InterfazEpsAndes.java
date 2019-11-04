@@ -1,4 +1,4 @@
-package interfazApp;
+package interfazAppDemo;
 
 import java.awt.BorderLayout;
 

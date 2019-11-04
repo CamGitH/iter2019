@@ -9,12 +9,12 @@
 		  "options":
 			[
 				{
-					"label": "Reservar Consultas con Medico General",
-					"event": "reservarConsultasMedicoGeneral"
+					"label": "Cancelar servicios de la campaña",
+					"event": "cancelarServiciosCampaña"
 				},
 				{
-					"label": "Reservar Consultas con Medico Especialista",
-					"event": "reservarConsultasMedicoEspecilista"
+					"label": "Rehabilitar servicios",
+					"event": "rehabilitarServicios"
 				},
 				{
 					"label":"Registrar Campaña de prevencion",

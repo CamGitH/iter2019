@@ -594,6 +594,96 @@ public class PersistenciaEpsAndes {
 		return sqlServicio.darServiciosPorNombre(pmf.getPersistenceManager(), pNombre);
 	}
 	
+	public List<Servicio> darServicioPorCampaña( long pIdCampaña)
+	{
+		return sqlServicio.darServiciosPorCampaña(pmf.getPersistenceManager(), pIdCampaña);
+	}
+	
+	public long cancelarServicioCampaña(long pCodigo)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlServicio.cancelarServiciosDeCampaña(pm,  pCodigo);
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	
+	public long deshabilitarServico(long pCodigo)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlServicio.deshabilitarServicio(pm,  pCodigo);
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	public long rehabilitarServico(long pCodigo)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long resp = sqlServicio.rehabilitarServicio(pm,  pCodigo);
+            tx.commit();
+
+            return resp;
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+            return -1;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
 	public long reservarServicio (long pCodigo, int pReservas)
 	{
 		PersistenceManager pm = pmf.getPersistenceManager();

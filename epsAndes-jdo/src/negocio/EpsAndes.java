@@ -117,11 +117,31 @@ public class EpsAndes {
 		
 	}
 	
+	public long cancelarServicioCampaña(long pCodigo)
+	{
+		return pe.cancelarServicioCampaña(pCodigo);
+	}
+	
+	public long deshabilitarServicio(long pCodigo)
+	{
+		return pe.deshabilitarServico(pCodigo);
+	}
+	public long rehabilitarServicio(long pCodigo)
+	{
+		return pe.rehabilitarServico(pCodigo);
+	}
+	
 	public Servicio darServiciosporNombre(String pNombre)
 	{
 		log.info ("Consultando Servicios");
         List<Servicio> servicios = pe.darServicioPorNombre(pNombre);
         return !servicios.isEmpty () ? servicios.get (0) : null;
+	}
+	public List<Servicio> darServiciosporCampaña(long pIdCampaña)
+	{
+		log.info ("Consultando Servicios");
+        List<Servicio> servicios = pe.darServicioPorCampaña(pIdCampaña);
+        return servicios;
 	}
 	
 	

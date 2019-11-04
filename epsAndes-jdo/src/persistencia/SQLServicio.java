@@ -48,7 +48,34 @@ public class SQLServicio {
 		return (List<Servicio>) q.executeList();
 	}
 
+	public List<Servicio> darServiciosPorCampaña (PersistenceManager pm, long idCampaña) 
+	{
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pe.darTablaServicio() + " WHERE ID_Campaña = ?");
+		q.setResultClass(Servicio.class);
+		q.setParameters(idCampaña);
+		return (List<Servicio>) q.executeList();
+	}
 	
+	public long cancelarServiciosDeCampaña(PersistenceManager pm, long pCodigo)
+	{
+		Query q= pm.newQuery(SQL, "UPDATE "+ pe.darTablaServicio()+"SET ID_CAMPAÑA= NULL, CAPACIDAD = CAPACIDAD + 1  WHERE  CodigoServicio =  ?");
+		q.setParameters(pCodigo);
+		return (long) q.executeUnique();
+	}
+	
+	public long deshabilitarServicio(PersistenceManager pm, long pCodigo)
+	{
+		Query q= pm.newQuery(SQL, "UPDATE "+ pe.darTablaServicio()+"SET  CAPACIDAD = 0  WHERE  CodigoServicio =  ?");
+		q.setParameters(pCodigo);
+		return (long) q.executeUnique();
+	}
+	
+	public long rehabilitarServicio(PersistenceManager pm, long pCodigo)
+	{
+		Query q= pm.newQuery(SQL, "UPDATE "+ pe.darTablaServicio()+"SET  CAPACIDAD = CAPACIDAD + 50  WHERE  CodigoServicio =  ?");
+		q.setParameters(pCodigo);
+		return (long) q.executeUnique();
+	}
 	
 	
 	public List<Servicio> darServicios (PersistenceManager pm)

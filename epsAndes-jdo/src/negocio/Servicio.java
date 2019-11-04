@@ -23,6 +23,7 @@ public class Servicio implements VOServicio{
 	protected String orden;
 	private TipoServicio tipo;
 	private int cantidadReservas;
+	private long idCampaña;
 
 	/* **********************
 	 * 			Métodos
@@ -39,12 +40,13 @@ public class Servicio implements VOServicio{
 		this.setOrden("");
 		this.setTipo(null);
 		this.setCantidadReservas(0);
+		this.setIdCampaña(0);
 	}
 
 	/**
 	 * Constructor con valores
 	 */
-	public Servicio (Long cod, String h, int cap, String ip, String o, TipoServicio pTipo, int cr)
+	public Servicio (Long cod, String h, int cap, String ip, String o, TipoServicio pTipo, int cr, long pIdCampaña)
 	{
 		this.setCodigoServicio(cod);
 		this.setHorario(h);
@@ -53,6 +55,7 @@ public class Servicio implements VOServicio{
 		this.setOrden(o);
 		this.setTipo(pTipo);
         this.setCantidadReservas(cr);
+        this.setIdCampaña(pIdCampaña);
 	}
 
 	
@@ -127,6 +130,14 @@ public class Servicio implements VOServicio{
 
 	public void setTipo(TipoServicio tipo) {
 		this.tipo = tipo;
+	}
+
+	public long getIdCampaña() {
+		return idCampaña;
+	}
+
+	public void setIdCampaña(long idCampaña) {
+		this.idCampaña = idCampaña;
 	}
 
 }
