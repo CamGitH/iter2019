@@ -21,8 +21,8 @@ public class Servicio implements VOServicio{
 	protected int capacidad;
 	protected String IPS;
 	protected String orden;
-	protected int reservas;
 	private TipoServicio tipo;
+	private int cantidadReservas;
 
 	/* **********************
 	 * 			Métodos
@@ -37,22 +37,22 @@ public class Servicio implements VOServicio{
 		this.setCapacidad(0);
 		this.setIPS("");
 		this.setOrden("");
-		this.setReservas(0);
 		this.setTipo(null);
+		this.setCantidadReservas(0);
 	}
 
 	/**
 	 * Constructor con valores
 	 */
-	public Servicio (Long cod, String h, int cap, String ip, String o, int pReservas, TipoServicio pTipo) 
+	public Servicio (Long cod, String h, int cap, String ip, String o, TipoServicio pTipo, int cr)
 	{
 		this.setCodigoServicio(cod);
 		this.setHorario(h);
 		this.setCapacidad(cap);
 		this.setIPS(ip);
 		this.setOrden(o);
-		this.setReservas(pReservas);
 		this.setTipo(pTipo);
+        this.setCantidadReservas(cr);
 	}
 
 	
@@ -63,7 +63,7 @@ public class Servicio implements VOServicio{
 	@Override
 	public String toString() 
 	{
-		return "Servicio ["+ codigoServicio + ", "+ horario + ", "+ capacidad + ", "+ IPS + ", " + orden + ", " + reservas + "]";
+		return "Servicio ["+ codigoServicio + ", "+ horario + ", "+ capacidad + ", "+ IPS + ", " + orden + ", " + cantidadReservas + "]";
 	}
 
 	public void setCapacidad(int pcapacidad) {
@@ -78,7 +78,9 @@ public class Servicio implements VOServicio{
 		return orden;
 	}
 
-	public void setOrden(String orden) {
+
+
+    public void setOrden(String orden) {
 		this.orden = orden;
 	}
 
@@ -95,19 +97,20 @@ public class Servicio implements VOServicio{
 		IPS = iPS;
 	}
 
-	public int getReservas() {
-		return reservas;
+
+	public void setCantidadReservas(int pReservas) {
+		this.cantidadReservas = pReservas;
 	}
 
-	public void setReservas(int pReservas) {
-		this.reservas = pReservas;
-	}
 
+    public int getCantidadReservas() {
+        return cantidadReservas;
+    }
 	@Override
 	public long getCodigoServicio() {
-		// TODO Auto-generated method stub
-		return codigoServicio;
-	}
+        // TODO Auto-generated method stub
+        return codigoServicio;
+    }
 
 	@Override
 	public int getCapacidad() {

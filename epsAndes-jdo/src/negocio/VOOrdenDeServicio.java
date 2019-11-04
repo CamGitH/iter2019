@@ -1,5 +1,7 @@
 package negocio;
 
+import java.sql.Date;
+
 public interface VOOrdenDeServicio{
 	/* **********************
 	 * 			Métodos 
@@ -13,4 +15,9 @@ public interface VOOrdenDeServicio{
 	 * @return Tipo
 	 */
 	public String getTipo();
+
+	/**
+	 * @return fecha
+	 */
+	public Date getFecha();
 }
