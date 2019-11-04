@@ -108,19 +108,16 @@ public class Servicio implements VOServicio{
     }
 	@Override
 	public long getCodigoServicio() {
-        // TODO Auto-generated method stub
         return codigoServicio;
     }
 
 	@Override
 	public int getCapacidad() {
-		// TODO Auto-generated method stub
 		return capacidad;
 	}
 
 	@Override
 	public String getIps() {
-		// TODO Auto-generated method stub
 		return IPS;
 	}
 
