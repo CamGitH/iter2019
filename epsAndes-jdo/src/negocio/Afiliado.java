@@ -28,7 +28,6 @@ public class Afiliado implements VOAfiliado{
 
 	@Override
 	public long getId() {
-		// TODO Auto-generated method stub
 		return id;
 	}
 	
@@ -49,13 +48,11 @@ public class Afiliado implements VOAfiliado{
 
 	@Override
 	public Date getFechaNacimiento() {
-		// TODO Auto-generated method stub
 		return fechaDeNaciemiento;
 	}
 
 	@Override
 	public String getOrdenServicio() {
-		// TODO Auto-generated method stub
 		return ordenDeServicio;
 	}
 

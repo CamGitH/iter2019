@@ -30,7 +30,7 @@ public interface VOServicio{
 	public String getOrden();
 	
 	/**
-	 * @return  Reservas
+	 * @return  Cantidad de Reservas
 	 */
-	public int getReservas();
+	public int getCantidadReservas();
 }

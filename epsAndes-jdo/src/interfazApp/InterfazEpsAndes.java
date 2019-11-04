@@ -350,7 +350,6 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
 		String evento=  arg0.getActionCommand();
 		
 		if(evento.equals("registrarEps"))

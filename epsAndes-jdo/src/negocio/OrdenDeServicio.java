@@ -1,5 +1,7 @@
 package negocio;
 
+import java.sql.Date;
+
 public class OrdenDeServicio implements VOOrdenDeServicio{
 	/* **********************
 	 * 			Atributos
@@ -7,6 +9,7 @@ public class OrdenDeServicio implements VOOrdenDeServicio{
 
 	private Long numero;
 	private String tipo;
+	private Date fecha;
 
 	/* **********************
 	 * 			Métodos
@@ -18,15 +21,17 @@ public class OrdenDeServicio implements VOOrdenDeServicio{
 	{
 		this.setNumeroOrden((long) 0);
 		this.setTipo("");
+		this.setFecha(Date.valueOf("12-07-2000"));
 	}
 
 	/**
 	 * Constructor con valores
 	 */
-	public OrdenDeServicio (Long id, String t) 
+	public OrdenDeServicio (Long id, String t, Date f)
 	{
 		this.setNumeroOrden(id);
 		this.setTipo(t);
+		this.setFecha(f);
 	}
 
 	
@@ -52,11 +57,18 @@ public class OrdenDeServicio implements VOOrdenDeServicio{
 		return tipo;
 	}
 
+
+	public void setFecha(Date fecha) {
+		this.fecha=fecha;
+	}
+
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 
-	
 
+	public Date getFecha() {
+		return fecha;
+	}
 	
 }

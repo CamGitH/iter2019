@@ -390,6 +390,8 @@ create table SERVICIO
 	ID_CAMPAÑA Number
 		constraint FK_S_CDP
 			references CDEPREVENCION
+
+    CANTIDADRESERVAS   NUMBER not null
 )
 /
 
