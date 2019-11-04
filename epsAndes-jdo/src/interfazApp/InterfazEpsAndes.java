@@ -234,6 +234,17 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 		}
 	}
 	
+	public void cancelarServiciosCampaña()
+	{
+		
+	}
+	
+	
+	public void deshabilitarServicios()
+	{
+		
+	}
+	
 	
 	public void registrarCampaña()
 	{
@@ -293,7 +304,11 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
         			throw new Exception ("No se pudo crear esta campaña");
         		}
         		String resultado = "En registrar una campaña\n\n";
-        		resultado += "Campaña adicionada exitosamente: " + tb;
+        		resultado += "Campaña adicionada exitosamente: " + tb+"con estos servicios:";
+        		for (int j = 0; j < serviciosRegistrados.size(); j++) {
+        			resultado+= serviciosRegistrados.get(j).getTipo()+"en este horario"+ serviciosRegistrados.get(j).getHorario()+"\n";
+					
+				}
     			resultado += "\n Operación terminada";
     			panelDatos.actualizarInterfaz(resultado);
     			}
