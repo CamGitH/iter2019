@@ -386,12 +386,11 @@ create table SERVICIO
 			references ORDENDESERVICIO,
 	ID_AFILIADO VARCHAR2(20)
 		constraint FK_S_IDA
-			references AFILIADO
-	ID_CAMPAÑA Number
+			references AFILIADO,
+	ID_CAMPAÑA NUMBER
 		constraint FK_S_CDP
-			references CDEPREVENCION
-
-    CANTIDADRESERVAS   NUMBER not null
+			references CDEPREVENCION,
+	CANTIDADDERESERVAS NUMBER not null
 )
 /
 
@@ -410,8 +409,9 @@ create table CONSULTA
 		constraint FK_C_RECETA
 			references RECETA
 )
+/
 
-ENABLE;
+
 
 COMMIT;
 /
