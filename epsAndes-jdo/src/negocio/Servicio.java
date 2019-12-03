@@ -20,7 +20,6 @@ public class Servicio implements VOServicio{
 	protected String horario;
 	protected int capacidad;
 	protected String IPS;
-	protected String orden;
 	private TipoServicio tipo;
 	private int cantidadReservas;
 	private long idCampaña;
@@ -37,7 +36,6 @@ public class Servicio implements VOServicio{
 		this.setHorario("");
 		this.setCapacidad(0);
 		this.setIPS("");
-		this.setOrden("");
 		this.setTipo(null);
 		this.setCantidadReservas(0);
 		this.setIdCampaña(0);
@@ -46,13 +44,13 @@ public class Servicio implements VOServicio{
 	/**
 	 * Constructor con valores
 	 */
-	public Servicio (Long cod, String h, int cap, String ip, String o, TipoServicio pTipo, int cr, long pIdCampaña)
+	public Servicio (Long cod, String h, int cap, String ip,  TipoServicio pTipo, int cr, long pIdCampaña)
 	{
 		this.setCodigoServicio(cod);
 		this.setHorario(h);
 		this.setCapacidad(cap);
 		this.setIPS(ip);
-		this.setOrden(o);
+
 		this.setTipo(pTipo);
         this.setCantidadReservas(cr);
         this.setIdCampaña(pIdCampaña);
@@ -66,7 +64,7 @@ public class Servicio implements VOServicio{
 	@Override
 	public String toString() 
 	{
-		return "Servicio ["+ codigoServicio + ", "+ horario + ", "+ capacidad + ", "+ IPS + ", " + orden + ", " + cantidadReservas + "]";
+		return "Servicio ["+ codigoServicio + ", "+ horario + ", "+ capacidad + ", "+ IPS  + ", " + cantidadReservas + "]";
 	}
 
 	public void setCapacidad(int pcapacidad) {
@@ -77,15 +75,7 @@ public class Servicio implements VOServicio{
 		this.codigoServicio = pCodigo;
 	}
 
-	public String getOrden() {
-		return orden;
-	}
-
-
-
-    public void setOrden(String orden) {
-		this.orden = orden;
-	}
+	
 
 	public String getHorario() {
 		return horario;

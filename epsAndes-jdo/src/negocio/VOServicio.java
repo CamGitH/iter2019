@@ -24,10 +24,6 @@ public interface VOServicio{
 	 */
 	public String getIps();
 	
-	/**
-	 * @return Orden
-	 */
-	public String getOrden();
 	
 	/**
 	 * @return  Cantidad de Reservas

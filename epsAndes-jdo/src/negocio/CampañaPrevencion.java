@@ -14,8 +14,6 @@ public class CampañaPrevencion implements VOCampañaPrevencion{
 	
 	private Date fechaFinal;
 	
-	private long idCampaña;
-	
 	private ArrayList<Eps> listaEps;
 	
 	private ArrayList<Servicio> servicios;

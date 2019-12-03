@@ -8,18 +8,22 @@ public class AfiliadosEnServicio implements VOAfiliadosEnServicio{
 	
 	private String idUsuario;
 	
+	private long numeroOrden;
+	
 	
 	public AfiliadosEnServicio()
 	{
 		this.setCodigoServicio(0);
 		this.setIdUsuario("");
+		this.setNumeroOrden(0);
 		
 	}
 	
-	public AfiliadosEnServicio(String pId, long pCodigo)
+	public AfiliadosEnServicio(String pId, long pCodigo, long pOrden)
 	{
 		this.setCodigoServicio(pCodigo);
 		this.setIdUsuario(idUsuario);
+		this.setNumeroOrden(pOrden);
 	}
 
 
@@ -40,6 +44,14 @@ public class AfiliadosEnServicio implements VOAfiliadosEnServicio{
 
 	public void setIdUsuario(String idUsuario) {
 		this.idUsuario = idUsuario;
+	}
+
+	public long getNumeroOrden() {
+		return numeroOrden;
+	}
+
+	public void setNumeroOrden(long numeroOrden) {
+		this.numeroOrden = numeroOrden;
 	}
 
 	
