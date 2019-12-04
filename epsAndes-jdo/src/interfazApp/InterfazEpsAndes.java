@@ -32,7 +32,10 @@ import com.google.gson.stream.JsonReader;
 import negocio.CampañaPrevencion;
 import negocio.Eps;
 import negocio.EpsAndes;
+import negocio.Ips;
+import negocio.MedicoGeneral;
 import negocio.Servicio;
+import negocio.Usuario;
 
 
 
@@ -40,7 +43,6 @@ import negocio.Servicio;
 @SuppressWarnings("serial")
 public class InterfazEpsAndes extends JFrame implements ActionListener{
 
-	private static Logger log = Logger.getLogger(InterfazEpsAndes.class.getName());
 	
 	private static final String CONFIG_INTERFAZ = "./resources/config/interfaceConfigApp.json";
 	
@@ -129,12 +131,10 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 			FileReader file = new FileReader (archConfig);
 			JsonReader reader = new JsonReader ( file );
 			config = gson.fromJson(reader, JsonObject.class);
-			log.info ("Se encontró un archivo de configuración válido: " + tipo);
 		} 
 		catch (Exception e)
 		{
-//			e.printStackTrace ();
-			log.info ("NO se encontró un archivo de configuración válido");			
+//			e.printStackTrace ();		
 			JOptionPane.showMessageDialog(null, "No se encontró un archivo de configuración de interfaz válido: " + tipo, "Parranderos App", JOptionPane.ERROR_MESSAGE);
 		}	
         return config;
@@ -179,15 +179,13 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
     	String titulo = "";	
     	
     	if ( guiConfig == null )
-    	{
-    		log.info ( "Se aplica configuración por defecto" );			
+    	{		
 			titulo = "EpsAndes APP ";
 			alto = 300;
 			ancho = 500;
     	}
     	else
     	{
-			log.info ( "Se aplica configuración indicada en el archivo de configuración" );
     		titulo = guiConfig.get("title").getAsString();
 			alto= guiConfig.get("frameH").getAsInt();
 			ancho = guiConfig.get("frameW").getAsInt();
@@ -202,7 +200,7 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 		setSize ( ancho, alto);        
     }
 	
-	
+	//R0
 	public void adicionarEps()
 	{
 		try 
@@ -218,6 +216,122 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
         		}
         		String resultado = "En adicionar Eps\n\n";
         		resultado += "Eps adicionada exitosamente: " + tb;
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	//R2
+	public void adicionarUsuario()
+	{
+		try 
+    	{
+			String [] tipos= {"CEDULA", "TARJETA DE IDENTIDAD", "CEDULA DE EXTRANJERIA"};
+			
+			ImageIcon icono= new ImageIcon("./resources/config/icono.jpg");
+			
+			
+    		String nombre = JOptionPane.showInputDialog (this, "Nombre del Usuario?", "Adicionar Usuario", JOptionPane.QUESTION_MESSAGE);
+    		String apellido=JOptionPane.showInputDialog (this, "Apellido del Usuario?", "Adicionar Usuario", JOptionPane.QUESTION_MESSAGE);
+    		String correo = JOptionPane.showInputDialog (this, "Correo del usuario?", "Adicionar Usuario", JOptionPane.QUESTION_MESSAGE);
+    		String nombreEps = JOptionPane.showInputDialog (this, "Nombre de la eps?", "Adicionar Usuario", JOptionPane.QUESTION_MESSAGE);
+
+			String resp = (String) JOptionPane.showInputDialog(this, "Seleccione su tipo de identificacion", "Seleccione", JOptionPane.DEFAULT_OPTION,icono, tipos, tipos[0]);
+    		if (nombre != null&& apellido != null)
+    		{
+    			Usuario tb = epsAndes.agregarUsuario(correo, nombre, apellido, resp, nombreEps);
+        		if (tb == null)
+        		{
+        			throw new Exception ("No se pudo crear un usuario con este nombre: " + nombre);
+        		}
+        		String resultado = "En adicionar Usuario\n\n";
+        		resultado += "Usuario adicionada exitosamente: " + tb;
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	
+	
+	
+	//R3
+	public void adicionarIps()
+	{
+		try 
+    	{
+    		String nombreIps = JOptionPane.showInputDialog (this, "Nombre de la ips?", "Adicionar Ips", JOptionPane.QUESTION_MESSAGE);
+    		String localizacion =JOptionPane.showInputDialog (this, "Localizacion de la ips?", "Adicionar Ips", JOptionPane.QUESTION_MESSAGE);
+    		String recepcionista =JOptionPane.showInputDialog (this, "Localizacion de la ips?", "Adicionar Ips", JOptionPane.QUESTION_MESSAGE);
+    		String nombreEps=JOptionPane.showInputDialog (this, "Localizacion de la ips?", "Adicionar Ips", JOptionPane.QUESTION_MESSAGE);
+    		
+    		if (nombreIps != null)
+    		{
+    			Ips tb = epsAndes.agregarIps(nombreIps, localizacion, recepcionista, nombreEps);
+        		if (tb == null)
+        		{
+        			throw new Exception ("No se pudo crear una eps con este nombre: " + nombreEps);
+        		}
+        		String resultado = "En adicionar Eps\n\n";
+        		resultado += "Eps adicionada exitosamente: " + tb;
+    			resultado += "\n Operación terminada";
+    			panelDatos.actualizarInterfaz(resultado);
+    		}
+    		else
+    		{
+    			panelDatos.actualizarInterfaz("Operación cancelada por el usuario");
+    		}
+		} 
+    	catch (Exception e) 
+    	{
+//			e.printStackTrace();
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+	}
+	
+	//R4
+	public void adicionarMedico()
+	{
+		try 
+    	{
+			
+			
+    		String nombre = JOptionPane.showInputDialog (this, "Nombre del Medico?", "Adicionar Medico", JOptionPane.QUESTION_MESSAGE);
+    		String apellido=JOptionPane.showInputDialog (this, "Apellido del Medico?", "Adicionar Medico", JOptionPane.QUESTION_MESSAGE);
+    		String registroMedico = JOptionPane.showInputDialog (this, "Correo del usuario?", "Adicionar Medico", JOptionPane.QUESTION_MESSAGE);
+    		String nombreIps = JOptionPane.showInputDialog (this, "Nombre de la ips?", "Adicionar Medico", JOptionPane.QUESTION_MESSAGE);
+
+			if (nombre != null&& apellido != null)
+    		{
+    			MedicoGeneral tb = epsAndes.agregarMedicoGeneral(nombre, apellido, registroMedico, nombreIps);
+        		if (tb == null)
+        		{
+        			throw new Exception ("No se pudo crear un medico con este nombre: " + nombre);
+        		}
+        		String resultado = "En adicionar Medico\n\n";
+        		resultado += "Medico adicionada exitosamente: " + tb;
     			resultado += "\n Operación terminada";
     			panelDatos.actualizarInterfaz(resultado);
     		}
@@ -452,6 +566,14 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 		if(evento.equals("registrarEps"))
 		{
 			this.adicionarEps();
+		}
+		if (evento.equals("registrarMedico")) {
+			
+			this.adicionarMedico();
+		}
+		if(evento.equals("registrarUsuario"))
+		{
+			this.adicionarUsuario();
 		}
 		if(evento.equals("reservarCampaña"))
 		{

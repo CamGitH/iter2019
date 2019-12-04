@@ -17,6 +17,13 @@ public class SQLIps {
 		this.pe=pe;
 	}
 	
+	public long adicionarIps(PersistenceManager pm, String nombreIps,String localizacion, String recepcionista, String nombreEps) 
+	{
+		 Query q = pm.newQuery(SQL, "INSERT INTO " + pe.darTablaIps() + "( nombre, localizacion, recepcionista, nombreEps) values (?, ?, ?,?)");
+	     q.setParameters(nombreIps, localizacion, recepcionista, nombreEps);
+	     return (long) q.executeUnique();
+	}
+	
 	
 	public long  registrarLaPrestacionDeServicio(PersistenceManager pm, long codigoServicio, long idAfiliado)
 	{

@@ -1,20 +1,23 @@
 {
-	"title": "Nombres de las tablas de Parranderos Uniandes para la aplicación A",
+	"title": "Nombres de las tablas de EpsAndes Uniandes para la aplicación A",
 	"unidadPersistencia": "Parranderos",
 	"tablas":
 	[
-		"Parranderos_sequence",
+		"EpsAndes_sequence",
 		"AFILIADO",
-		"CAMPA�A_DE_PREVENCION",
+		"AFILIADO_SERVICIO",
+		"CDEPREVENCION",
 		"CONSULTA",
 		"EPS",
+		"ESPECIALISTA",
 		"IPS",
 		"MEDICAMENTO",
-		"MEDICO_GENERAL",
-		"MEDICO_ESPECIALISTA",
-		"ORDEN_DE_SERVICIO",
+		"MEDICO",
+		"ORDENDESERVICIO",
 		"RECETA",
+		"RECETAN",
 		"SERVICIO",
+		"SERVICIOS_IPS",
 		"USUARIO"
 	]
 }

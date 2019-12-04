@@ -25,21 +25,21 @@ public class SQLMedicoGeneral {
 	
 	public long registrarMedicoGeneral (PersistenceManager pm, long id, String nombre, String apellido, String pReg, String pIps) 
 	{
-        Query q = pm.newQuery(SQL, "INSERT INTO " + pe.darTablaMedicoGeneral () + "(nombre, apellido,  identificacion, pReg, pIps) values (?, ?, ?, ?, ?)");
-        q.setParameters(nombre, apellido, id, pReg, pIps );
+        Query q = pm.newQuery(SQL, "INSERT INTO " + pe.darTablaMedico() + "(apellido, id,  nombre, regisotromedico, Ips) values (?, ?, ?, ?, ?)");
+        q.setParameters(apellido, id, nombre, pReg, pIps );
         return (long) q.executeUnique();
 	}
 	
 	public long eliminarMedicoGeneralPorId (PersistenceManager pm, long id)
 	{
-        Query q = pm.newQuery(SQL, "DELETE FROM " + pe.darTablaMedicoGeneral () + " WHERE identificacion = ?");
+        Query q = pm.newQuery(SQL, "DELETE FROM " + pe.darTablaMedico () + " WHERE identificacion = ?");
         q.setParameters(id);
         return (long) q.executeUnique();
 	}
 	
 	public List<MedicoGeneral> darMedicosGenerales (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pe.darTablaMedicoGeneral ());
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pe.darTablaMedico ());
 		q.setResultClass(MedicoGeneral.class);
 		return (List<MedicoGeneral>) q.executeList();
 	}

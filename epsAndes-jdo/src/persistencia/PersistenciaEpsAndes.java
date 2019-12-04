@@ -1,8 +1,7 @@
 package persistencia;
 
 import java.sql.Date;
-
-
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,6 +20,7 @@ import com.google.gson.JsonObject;
 import negocio.Afiliado;
 import negocio.CampañaPrevencion;
 import negocio.Eps;
+import negocio.Ips;
 import negocio.MedicoEspecialista;
 import negocio.MedicoGeneral;
 import negocio.Servicio;
@@ -79,7 +79,7 @@ public class PersistenciaEpsAndes {
 	
 	private PersistenciaEpsAndes()
 	{
-		pmf = JDOHelper.getPersistenceManagerFactory("EpsAndes");
+		pmf = JDOHelper.getPersistenceManagerFactory("Parranderos");
 		crearClasesSQL();
 		
 		tablas= new LinkedList<String>();
@@ -107,7 +107,6 @@ public class PersistenciaEpsAndes {
 		tablas = leerNombresTablas(tableConfig);
 		
 		String unidadPersistencia = tableConfig.get ("unidadPersistencia").getAsString ();
-		log.trace ("Accediendo unidad de persistencia: " + unidadPersistencia);
 		pmf = JDOHelper.getPersistenceManagerFactory (unidadPersistencia);
 	
 	}
@@ -176,12 +175,12 @@ public class PersistenciaEpsAndes {
 	
 	public String darTablaEps()
 	{
-		return tablas.get(1);
+		return tablas.get(5);
 	}
 	
 	public String darTablaAfiliado()
 	{
-		return tablas.get(2);
+		return tablas.get(1);
 	}
 	
 	public String darTablaCDprevencion()
@@ -195,29 +194,26 @@ public class PersistenciaEpsAndes {
 	
 	public String darTablaIps()
 	{
-		return tablas.get(5);
+		return tablas.get(7);
 	}
 	
 	public String darTablaMedicamento()
 	{
-		return tablas.get(6);
+		return tablas.get(8);
 	}
 	
 	public String darTablaMedico()
 	{
-		return tablas.get(7);
+		return tablas.get(9);
 	}
 	
 	
 	public String darTablaMedicoEspecialista()
 	{
-		return tablas.get(8);
+		return tablas.get(6);
 	}
 	
-	public String darTablaMedicoGeneral()
-	{
-		return tablas.get(9);
-	}
+	
 
 	public String darTablaOrdenDeServicio()
 	{
@@ -231,17 +227,17 @@ public class PersistenciaEpsAndes {
 	
 	public String darTablaServicio()
 	{
-		return tablas.get(12);
+		return tablas.get(13);
 	}
 	
 	public String darTablaUsuario()
 	{
-		return tablas.get(13);
+		return tablas.get(15);
 	}
 	
 	public String darTablaRecetan()
 	{
-		return tablas.get(14);
+		return tablas.get(12);
 	}
 	
 	private long nextval ()
@@ -275,6 +271,36 @@ public class PersistenciaEpsAndes {
             log.trace ("Inserción de Eps: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
             
             return new Eps ( nombre, gerente);
+        }
+        catch (Exception e)
+        {
+//        	e.printStackTrace();
+        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
+        	return null;
+        }
+        finally
+        {
+            if (tx.isActive())
+            {
+                tx.rollback();
+            }
+            pm.close();
+        }
+	}
+	
+	public Ips adicionarIps(String nombre, String localizacion, String recepcionista, String nombreEps)
+	{
+		PersistenceManager pm = pmf.getPersistenceManager();
+        Transaction tx=pm.currentTransaction();
+        try
+        {
+            tx.begin();
+            long tuplasInsertadas = sqlIps.adicionarIps(pm, nombre, localizacion, recepcionista, nombreEps);
+            tx.commit();
+            
+            log.trace ("Inserción de Eps: " + nombre + ": " + tuplasInsertadas + " tuplas insertadas");
+            
+            return new Ips ( nombre, localizacion, recepcionista, nombreEps, new ArrayList<Servicio>());
         }
         catch (Exception e)
         {
@@ -465,14 +491,11 @@ public class PersistenciaEpsAndes {
             long tuplasInsertadas = sqlMedicoGeneral.registrarMedicoGeneral(pm, idMedico, pnombre, pApellido, pRegistro, pIps);
             tx.commit();
             
-            log.trace ("Inserción del medico general: " + idMedico + ": " + tuplasInsertadas + " tuplas insertadas");
             
             return new MedicoGeneral( pnombre, pApellido, idMedico,pRegistro, pApellido);
         }
         catch (Exception e)
         {
-
-        	log.error ("Exception : " + e.getMessage() + "\n" + darDetalleException(e));
         	return null;
         }
         finally

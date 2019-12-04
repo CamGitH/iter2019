@@ -37,7 +37,7 @@ public class SQLUtil {
         Query qMedicamento = pm.newQuery(SQL, "DELETE FROM " + pe.darTablaMedicamento());
         Query qMedico = pm.newQuery(SQL, "DELETE FROM " + pe.darTablaMedico());
         Query qMedicoEspecialista = pm.newQuery(SQL, "DELETE FROM " + pe.darTablaMedicoEspecialista());
-        Query qMedicoGeneral = pm.newQuery(SQL, "DELETE FROM " + pe.darTablaMedicoGeneral());
+        Query qMedicoGeneral = pm.newQuery(SQL, "DELETE FROM " + pe.darTablaMedico());
         Query qOrdenDeServicio = pm.newQuery(SQL, "DELETE FROM " + pe.darTablaOrdenDeServicio());
         Query qRecetas = pm.newQuery(SQL, "DELETE FROM " + pe.darTablaReceta());
         Query qRecetan = pm.newQuery(SQL, "DELETE FROM " + pe.darTablaRecetan());

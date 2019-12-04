@@ -2,6 +2,7 @@ package persistencia;
 
 import java.util.List;
 
+
 import javax.jdo.PersistenceManager;
 import javax.jdo.Query;
 
@@ -80,7 +81,7 @@ public class SQLServicio {
 	
 	public List<Servicio> darServicios (PersistenceManager pm)
 	{
-		Query q = pm.newQuery(SQL, "SELECT * FROM " + pe.darTablaMedicoGeneral ());
+		Query q = pm.newQuery(SQL, "SELECT * FROM " + pe.darTablaMedico ());
 		q.setResultClass(Servicio.class);
 		return (List<Servicio>) q.executeList();
 	}
