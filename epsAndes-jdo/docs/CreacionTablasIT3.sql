@@ -52,10 +52,7 @@ create table EPS
 	NOMBRE VARCHAR2(25) not null
 		constraint EPS_PK
 			primary key,
-	GERENTE VARCHAR2(25),
-	CDEPREVENCIO NUMBER
-		constraint EPS_CDEPREVENCION_ID_FK
-			references CDEPREVENCION(ID)
+	GERENTE VARCHAR2(25)
 )
 /
 
@@ -181,19 +178,18 @@ create table CONSULTA
 /
 create table AFILIADO_SERVICIO
 (
-    CODIGO_SERVICIO NUMBER not null
-        CONSTRAINT FK_AF_CS
-            REFERENCES SERVICIO(CODIGO_DE_SERVICIO),
-    ID_AFILIADO VARCHAR2(30)
-        CONSTRAINT FK_AF_ID_AFILIADO
-            REFERENCES USUARIO(ID),
-    NUMERO_ORDEN NUMBER not null
-        CONSTRAINT FK_AF_NO
-            REFERENCES ORDENDESERVICIO(NUMEROORDEN),
-        CONSTRAINT AFILIADO_SERVICIO_PK
-            PRIMARY KEY (CODIGO_SERVICIO, ID_AFILIADO, NUMERO_ORDEN)
-
-
+    CODIGO_SERVICIO NUMBER       not null
+        constraint FK_AF_CS
+            references SERVICIO,
+    ID_AFILIADO     VARCHAR2(30) not null
+        constraint FK_AF_ID_AFILIADO
+            references USUARIO,
+    NUMERO_ORDEN    NUMBER       not null
+        constraint FK_AF_NO
+            references ORDENDESERVICIO,
+    FECHA           DATE         not null,
+    constraint AFILIADO_SERVICIO_PK
+        primary key (CODIGO_SERVICIO, ID_AFILIADO, NUMERO_ORDEN)
 )
 /
 create table SERVICIOS_IPS
