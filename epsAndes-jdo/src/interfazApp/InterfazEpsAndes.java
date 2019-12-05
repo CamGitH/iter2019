@@ -348,6 +348,7 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 		}
 	}
 	
+	//R7
 	public void cancelarServiciosCampaña()
 	{
 		try 
@@ -382,7 +383,7 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+	//R12
 	public void deshabilitarServicios()
 	{
 		try 
@@ -418,7 +419,7 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 			panelDatos.actualizarInterfaz(resultado);
 		}
 	}
-	
+	//R13
 	public void rehabilitarServicios()
 	{
 		try 
@@ -456,7 +457,7 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 	
 	
 	
-	
+	//R10
 	public void registrarCampaña()
 	{
 		try 
@@ -535,6 +536,37 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 			String resultado = generarMensajeError(e);
 			panelDatos.actualizarInterfaz(resultado);
 		}
+	}
+	
+	//RC9
+	public void consultarLaPrestacionDeServiciosAdmin()
+	{
+		String Fecha = JOptionPane.showInputDialog (this, "Desea filtrar por fecha?Escriba Si en caso afirmativo, No en caso contrario", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
+		String TipoServico=JOptionPane.showInputDialog (this, "Desea filtrar por Tipo de Servcio?Escriba Si en caso afirmativo, No en caso contrario", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
+		String Ips=JOptionPane.showInputDialog (this, "Desea filtrar por Ips?Escriba Si en caso afirmativo, No en caso contrario", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
+		boolean pFecha=false;
+		boolean pIps=false;
+		boolean pTipo=false;
+		boolean p
+		
+		if(TipoServico.equalsIgnoreCase("si"))
+		{
+			
+			
+		}
+		if(Fecha.equalsIgnoreCase("si"))
+		{
+			boolean fecha=true;
+			String Fecha1 = JOptionPane.showInputDialog (this, "Ingrese la fecha inicial", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
+			String Fecha2 = JOptionPane.showInputDialog (this, "Ingrese la fecha inicial", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
+			
+		}
+		if(Ips.equalsIgnoreCase("si"))
+		{
+			
+		}
+		
+		
 	}
 	
 	

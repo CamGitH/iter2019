@@ -9,9 +9,11 @@ import javax.jdo.JDODataStoreException;
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Query;
 import javax.jdo.Transaction;
 
 import org.apache.log4j.Logger;
+import org.datanucleus.enhancer.methods.SetNormal;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -181,6 +183,11 @@ public class PersistenciaEpsAndes {
 	public String darTablaAfiliado()
 	{
 		return tablas.get(1);
+	}
+	
+	public String darTablaAS()
+	{
+		return tablas.get(2);
 	}
 	
 	public String darTablaCDprevencion()
@@ -600,6 +607,191 @@ public class PersistenciaEpsAndes {
             pm.close();
         }
 	}
+	
+	
+	public List<Usuario> consultaReq10(boolean pFecha, boolean pIps, boolean pTipoServicio, Date fechaI, Date fechaF, String ips, String tipo, boolean order, String criterio, boolean agrupamiento, String criterioA)
+	{
+		PersistenceManager pm=pmf.getPersistenceManager();
+		Query q=null;
+ 		String sentencia="";
+		String orderBy="ORDER BY ";
+		String group="GROUP BY ";
+		if(((pIps^pTipoServicio)^(pFecha))==true)
+		{
+			if(pTipoServicio==true)
+			{
+				sentencia="SELECT z.*\r\n" + 
+						"FROM \r\n" + 
+						"( Select x.codigo_servicio, y.*\r\n" + 
+						"From "+this.darTablaAS()+" x INNER JOIN "+this.darTablaUsuario()+ "y ON(x.id_afiliado=y.id)) z INNER Join servicio s On(z.Codigo_servicio=s.Codigo_de_servicio)\r\n"+
+						"WHERE NOT s.tipo_servicio= ?";
+				if(order)
+				{
+					orderBy="z."+criterio;
+					sentencia+=orderBy;
+				}
+				if(agrupamiento)
+				{
+					group="z."+criterioA;
+					sentencia+=group;
+				}
+				
+				
+				q = pm.newQuery(SQL, sentencia);
+				q.setParameters( tipo );
+				q.setResultClass(Usuario.class);
+				return (List<Usuario>) q.executeList();
+			}
+			if(pFecha==true)
+			{
+				sentencia="SELECT y.*, x.id_afiliado\r\n" + 
+						"FROM "+this.darTablaAS()+" x INNER JOIN "+ this.darTablaUsuario()+ " y ON(x.id_afiliado=y.id)\r\n" + 
+						"WHERE NOT x.FECHA > ? AND NOT x.FECHA < ?";
+				if(order)
+				{
+					orderBy="y."+criterio;
+					sentencia+=orderBy;
+				}
+				if(agrupamiento)
+				{
+					group="y."+criterioA;
+					sentencia+=group;
+				}
+				
+				q = pm.newQuery(SQL, sentencia);
+				q.setParameters( fechaI, fechaF );
+				q.setResultClass(Usuario.class);
+			}
+			if(pIps)
+			{
+				sentencia="SELECT\r\n" + 
+						"    a.*\r\n" + 
+						"FROM \r\n" + 
+						"(SELECT\r\n" + 
+						"afiliado_servicio.codigo_servicio,\r\n" + 
+						"usuario.*\r\n" + 
+						"FROM afiliado_servicio, usuario\r\n" + 
+						"WHERE usuario.id= afiliado_servicio.id_afiliado) a INNER JOIN servicios_ips on(servicios_ips.codigo_servicio=a.codigo_servicio)\r\n" + 
+						"Where servicios_ips.nombre_ips =  ? \r\n" ;
+				
+				if(order)
+				{
+					orderBy="a."+criterio;
+					sentencia+=orderBy;
+				}
+				if(agrupamiento)
+				{
+					group="a."+criterioA;
+					sentencia+=group;
+				}
+				
+				q = pm.newQuery(SQL, sentencia);
+				q.setParameters( ips);
+				q.setResultClass(Usuario.class);
+			}
+			
+		}
+		return (List<Usuario>) q.executeList();
+		
+		
+		
+		
+	}
+	
+	
+	public List<Usuario> consultaReq9(boolean pFecha, boolean pIps, boolean pTipoServicio, Date fechaI, Date fechaF, String ips, String tipo, boolean order, String criterio, boolean agrupamiento, String criterioA)
+	{
+		PersistenceManager pm=pmf.getPersistenceManager();
+		Query q=null;
+ 		String sentencia="";
+		String orderBy="ORDER BY ";
+		String group="GROUP BY ";
+		if(((pIps^pTipoServicio)^(pFecha))==true)
+		{
+			if(pTipoServicio==true)
+			{
+				sentencia="SELECT z.*\r\n" + 
+						"FROM \r\n" + 
+						"( Select x.codigo_servicio, y.*\r\n" + 
+						"From "+this.darTablaAS()+" x INNER JOIN "+this.darTablaUsuario()+ "y ON(x.id_afiliado=y.id)) z INNER Join servicio s On(z.Codigo_servicio=s.Codigo_de_servicio)\r\n"+
+						"WHERE s.tipo_servicio= ?";
+				if(order)
+				{
+					orderBy="z."+criterio;
+					sentencia+=orderBy;
+				}
+				if(agrupamiento)
+				{
+					group="z."+criterioA;
+					sentencia+=group;
+				}
+				
+				
+				q = pm.newQuery(SQL, sentencia);
+				q.setParameters( tipo );
+				q.setResultClass(Usuario.class);
+				return (List<Usuario>) q.executeList();
+			}
+			if(pFecha==true)
+			{
+				sentencia="SELECT y.*, x.id_afiliado\r\n" + 
+						"FROM "+this.darTablaAS()+" x INNER JOIN "+ this.darTablaUsuario()+ " y ON(x.id_afiliado=y.id)\r\n" + 
+						"WHERE x.FECHA > ? AND x.FECHA < ?";
+				if(order)
+				{
+					orderBy="y."+criterio;
+					sentencia+=orderBy;
+				}
+				if(agrupamiento)
+				{
+					group="y."+criterioA;
+					sentencia+=group;
+				}
+				
+				q = pm.newQuery(SQL, sentencia);
+				q.setParameters( fechaI, fechaF );
+				q.setResultClass(Usuario.class);
+			}
+			if(pIps)
+			{
+				sentencia="SELECT\r\n" + 
+						"  SELECT\r\n" + 
+						"    a.*\r\n" + 
+						"FROM \r\n" + 
+						"(SELECT\r\n" + 
+						"afiliado_servicio.codigo_servicio,\r\n" + 
+						"usuario.*\r\n" + 
+						"FROM afiliado_servicio, usuario\r\n" + 
+						"WHERE usuario.id= afiliado_servicio.id_afiliado) a INNER JOIN servicios_ips on(servicios_ips.codigo_servicio=a.codigo_servicio)\r\n" + 
+						"Where servicios_ips.nombre_ips = ? \r\n" + 
+						"; ";
+				
+				if(order)
+				{
+					orderBy="a."+criterio;
+					sentencia+=orderBy;
+				}
+				if(agrupamiento)
+				{
+					group="a."+criterioA;
+					sentencia+=group;
+				}
+				
+				q = pm.newQuery(SQL, sentencia);
+				q.setParameters( ips);
+				q.setResultClass(Usuario.class);
+			}
+			
+		}
+		return (List<Usuario>) q.executeList();
+		
+		
+		
+		
+	}
+	
+	
+	
 	
 	
 	public List<MedicoEspecialista> darMedicosEspecialistas ()
