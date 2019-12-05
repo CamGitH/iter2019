@@ -3,6 +3,7 @@ package interfazApp;
 import java.awt.BorderLayout;
 
 
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -10,8 +11,11 @@ import java.awt.event.ActionListener;
 import java.io.FileReader;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import javax.jdo.JDODataStoreException;
+import javax.jdo.annotations.Value;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -544,27 +548,135 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 		String Fecha = JOptionPane.showInputDialog (this, "Desea filtrar por fecha?Escriba Si en caso afirmativo, No en caso contrario", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
 		String TipoServico=JOptionPane.showInputDialog (this, "Desea filtrar por Tipo de Servcio?Escriba Si en caso afirmativo, No en caso contrario", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
 		String Ips=JOptionPane.showInputDialog (this, "Desea filtrar por Ips?Escriba Si en caso afirmativo, No en caso contrario", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
+		
 		boolean pFecha=false;
 		boolean pIps=false;
 		boolean pTipo=false;
-		boolean p
+		boolean pOrden=false;
+		boolean pGroup=false;
+		String Fecha1 ="";
+		String Fecha2="";
+		String tipoSer="";
+		String ips="";
+		String criterio1="";
+		String criterio2="";
 		
 		if(TipoServico.equalsIgnoreCase("si"))
 		{
-			
-			
+			pTipo=true;
+			tipoSer= JOptionPane.showInputDialog (this, "Ingrese el tipo de servicio", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
 		}
 		if(Fecha.equalsIgnoreCase("si"))
 		{
-			boolean fecha=true;
-			String Fecha1 = JOptionPane.showInputDialog (this, "Ingrese la fecha inicial", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
-			String Fecha2 = JOptionPane.showInputDialog (this, "Ingrese la fecha inicial", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
-			
+			pFecha=true;
+			Fecha1 = JOptionPane.showInputDialog (this, "Ingrese la fecha inicial", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
+			Fecha2 = JOptionPane.showInputDialog (this, "Ingrese la fecha inicial", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
 		}
 		if(Ips.equalsIgnoreCase("si"))
 		{
+			pIps=true;
+			ips= JOptionPane.showInputDialog (this, "Ingrese la ips", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
 			
 		}
+		
+		String orden=JOptionPane.showInputDialog (this, "deseas ordenar tus resultados?", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
+		
+		if(orden.equalsIgnoreCase("si"))
+		{
+			pOrden=true;
+			criterio1= JOptionPane.showInputDialog (this, "Ingrese el criterio con el que vas a ordenar", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
+			
+		}
+		String agrupe=JOptionPane.showInputDialog (this, "deseas agrupar tus resultados?", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
+		
+		if(orden.equalsIgnoreCase("si"))
+		{
+			pGroup=true;
+			criterio2= JOptionPane.showInputDialog (this, "Ingrese el criterio con el que vas a agrupar", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
+			
+		}
+		try {
+			List<Usuario>lista=epsAndes.consultaReq9(pFecha, pIps, pTipo, Date.valueOf(Fecha1), Date.valueOf(Fecha2), ips, tipoSer, pOrden, criterio1, pGroup, criterio2);
+			String resp="";
+			for (int i = 0; i < lista.size(); i++) {
+				resp+=lista.get(i).getNombre();
+			}
+			panelDatos.actualizarInterfaz(resp);
+		} catch (Exception e) {
+			// TODO: handle exception
+
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+		
+		
+		
+	}
+	
+	public void consultarLaPrestacionDeServiciosAdminReq10()
+	{
+		String Fecha = JOptionPane.showInputDialog (this, "Desea filtrar por fecha?Escriba Si en caso afirmativo, No en caso contrario", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
+		String TipoServico=JOptionPane.showInputDialog (this, "Desea filtrar por Tipo de Servcio?Escriba Si en caso afirmativo, No en caso contrario", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
+		String Ips=JOptionPane.showInputDialog (this, "Desea filtrar por Ips?Escriba Si en caso afirmativo, No en caso contrario", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
+		
+		boolean pFecha=false;
+		boolean pIps=false;
+		boolean pTipo=false;
+		boolean pOrden=false;
+		boolean pGroup=false;
+		String Fecha1 ="";
+		String Fecha2="";
+		String tipoSer="";
+		String ips="";
+		String criterio1="";
+		String criterio2="";
+		
+		if(TipoServico.equalsIgnoreCase("si"))
+		{
+			pTipo=true;
+			tipoSer= JOptionPane.showInputDialog (this, "Ingrese el tipo de servicio", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
+		}
+		if(Fecha.equalsIgnoreCase("si"))
+		{
+			pFecha=true;
+			Fecha1 = JOptionPane.showInputDialog (this, "Ingrese la fecha inicial", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
+			Fecha2 = JOptionPane.showInputDialog (this, "Ingrese la fecha inicial", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
+		}
+		if(Ips.equalsIgnoreCase("si"))
+		{
+			pIps=true;
+			ips= JOptionPane.showInputDialog (this, "Ingrese la ips", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
+			
+		}
+		
+		String orden=JOptionPane.showInputDialog (this, "deseas ordenar tus resultados?", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
+		
+		if(orden.equalsIgnoreCase("si"))
+		{
+			pOrden=true;
+			criterio1= JOptionPane.showInputDialog (this, "Ingrese el criterio con el que vas a ordenar", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
+			
+		}
+		String agrupe=JOptionPane.showInputDialog (this, "deseas agrupar tus resultados?", "Registrar Campaña", JOptionPane.QUESTION_MESSAGE);
+		
+		if(agrupe.equalsIgnoreCase("si"))
+		{
+			pGroup=true;
+			criterio2= JOptionPane.showInputDialog (this, "Ingrese el criterio con el que vas a agrupar", "Consultar Afiliados", JOptionPane.QUESTION_MESSAGE);
+			
+		}
+		try {
+			epsAndes.consultaReq10(pFecha, pIps, pTipo, Date.valueOf(Fecha1), Date.valueOf(Fecha2), ips, tipoSer, pOrden, criterio1, pGroup, criterio2);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+
+			String resultado = generarMensajeError(e);
+			panelDatos.actualizarInterfaz(resultado);
+		}
+		
+		
+		
 		
 		
 	}
@@ -619,6 +731,13 @@ public class InterfazEpsAndes extends JFrame implements ActionListener{
 		{
 			this.rehabilitarServicios();;
 		}
+		if (evento.equals("req9")) {
+			this.consultarLaPrestacionDeServiciosAdmin();
+		}
+		if (evento.equals("req10")) {
+			this.consultarLaPrestacionDeServiciosAdminReq10();
+		}
+		
 		
 	}
 	

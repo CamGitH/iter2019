@@ -137,6 +137,18 @@ public class EpsAndes {
         return medicoGeneral;
 	}
 	
+	public List<Usuario> consultaReq9(boolean pFecha, boolean pIps, boolean pTipoServicio, Date fechaI, Date fechaF, String ips, String tipo, boolean order, String criterio , boolean agrupamiento, String criterioA)
+	{
+		List<Usuario> reps= pe.consultaReq9(pFecha, pIps, pTipoServicio, fechaI, fechaF, ips, tipo, order, criterio, agrupamiento, criterioA);
+		return reps;
+	}
+	
+	public List<Usuario> consultaReq10(boolean pFecha, boolean pIps, boolean pTipoServicio, Date fechaI, Date fechaF, String ips, String tipo, boolean order, String criterio , boolean agrupamiento, String criterioA)
+	{
+		List<Usuario> reps= pe.consultaReq10(pFecha, pIps, pTipoServicio, fechaI, fechaF, ips, tipo, order, criterio, agrupamiento, criterioA);
+		return reps;
+	}
+	
 	
 	public long eliminarMedicoGeneral(long idMedicoGeneral)
 	{
