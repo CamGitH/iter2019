@@ -18,5 +18,12 @@
       <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
       <jdbc-url>jdbc:oracle:thin:@ fn3.oracle.virtual.uniandes.edu.co:1521:prod</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="jdbc:oracle:thin:@ fn3.oracle.virtual.uniandes.edu.co:1521:prod [2]" uuid="875d0bb6-7c1e-4c48-952a-aae793b5db99">
+      <driver-ref>oracle</driver-ref>
+      <synchronize>true</synchronize>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@ fn3.oracle.virtual.uniandes.edu.co:1521:prod</jdbc-url>
+    </data-source>
   </component>
 </project>
